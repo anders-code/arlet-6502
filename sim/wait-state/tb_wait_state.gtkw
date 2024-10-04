@@ -1,0 +1,24 @@
+[*]
+[*] GTKWave Analyzer v3.3.118 (w)1999-2023 BSI
+[*]
+[timestart] 0
+[size] 2200 924
+[pos] -1 -1
+*-15.379670 105300 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_wait_state.
+[sst_width] 273
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 269
+@28
+tb_wait_state.tb_clkgen_inst.clki
+tb_wait_state.rst
+tb_wait_state.cpu_inst.RDY
+@22
+tb_wait_state.cpu_inst.AB[15:0]
+tb_wait_state.cpu_inst.PC[15:0]
+tb_wait_state.cpu_inst.state[5:0]
+@821
+tb_wait_state.cpu_inst.statename[47:0]
+[pattern_trace] 1
+[pattern_trace] 0
