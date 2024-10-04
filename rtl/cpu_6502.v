@@ -18,7 +18,7 @@
  * on the output pads if external memory is required.
  */
 
-module cpu( clk, reset, AB, DI, DO, WE, IRQ, NMI, RDY );
+module cpu_6502( clk, reset, AB, DI, DO, WE, IRQ, NMI, RDY );
 
 input clk;              // CPU clock 
 input reset;            // reset signal
@@ -566,7 +566,7 @@ always @*
  * ALU
  */
 
-ALU ALU( .clk(clk),
+alu_6502 alu_inst( .clk(clk),
          .op(alu_op),
          .right(alu_shift_right),
          .AI(AI),
