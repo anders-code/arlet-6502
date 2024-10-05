@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_functional_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_functional" />
+            <top_module name="tb_utils" />
+            <top_module name="tb_utils_private" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="37,444,100.833 ns"></ZoomStartTime>
+      <ZoomEndTime time="37,444,359.034 ns"></ZoomEndTime>
+      <Cursor1Time time="37,444,316.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="205"></NameColumnWidth>
+      <ValueColumnWidth column_width="158"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="12" />
+   <wvobject type="logic" fp_name="/tb_functional/tb_clkgen_inst/clki">
+      <obj_property name="ElementShortName">clki</obj_property>
+      <obj_property name="ObjectShortName">clki</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_functional/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_functional/ab">
+      <obj_property name="ElementShortName">ab[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ab[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_functional/dout">
+      <obj_property name="ElementShortName">dout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_functional/din">
+      <obj_property name="ElementShortName">din[7:0]</obj_property>
+      <obj_property name="ObjectShortName">din[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider15" type="divider">
+      <obj_property name="label">cpu</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_functional/tb_clkgen_inst/clki">
+      <obj_property name="ElementShortName">clki</obj_property>
+      <obj_property name="ObjectShortName">clki</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_functional/cpu_inst/PC">
+      <obj_property name="ElementShortName">PC[15:0]</obj_property>
+      <obj_property name="ObjectShortName">PC[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_functional/cpu_inst/AB">
+      <obj_property name="ElementShortName">AB[15:0]</obj_property>
+      <obj_property name="ObjectShortName">AB[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_functional/cpu_inst/state">
+      <obj_property name="ElementShortName">state[5:0]</obj_property>
+      <obj_property name="ObjectShortName">state[5:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_functional/cpu_inst/statename">
+      <obj_property name="ElementShortName">statename[47:0]</obj_property>
+      <obj_property name="ObjectShortName">statename[47:0]</obj_property>
+      <obj_property name="Radix">ASCIIRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_functional/tc">
+      <obj_property name="ElementShortName">tc[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tc[7:0]</obj_property>
+   </wvobject>
+</wave_config>
