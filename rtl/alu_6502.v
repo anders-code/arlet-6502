@@ -101,7 +101,7 @@ always @* begin
 end
 
 // calculate the flags
-always @(posedge clk)
+always @(posedge clk) begin
     if( RDY ) begin
         AI7 <= AI[7];
         BI7 <= temp_BI[7];
@@ -110,6 +110,7 @@ always @(posedge clk)
         N   <= temp[7];
         HC  <= temp_HC;
     end
+end
 
 assign V = AI7 ^ BI7 ^ CO ^ N;
 assign Z = ~|OUT;
