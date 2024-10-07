@@ -17,6 +17,9 @@
  * The data bus is implemented as separate read/write buses. Combine them
  * on the output pads if external memory is required.
  */
+ `resetall
+ `timescale 1ns/1ps
+ `default_nettype none
 
 `ifdef USE_ASYNC_RESET
     `define ASYNC_RESET or posedge reset
@@ -24,17 +27,17 @@
     `define ASYNC_RESET
 `endif
 
-module cpu_6502( clk, reset, AB, DI, DO, WE, IRQ, NMI, RDY );
-
-input clk;              // CPU clock
-input reset;            // reset signal
-output reg [15:0] AB;   // address bus
-input [7:0] DI;         // data in, read bus
-output [7:0] DO;        // data out, write bus
-output WE;              // write enable
-input IRQ;              // interrupt request
-input NMI;              // non-maskable interrupt request
-input RDY;              // Ready signal. Pauses CPU when RDY=0
+module cpu_6502 (
+    input wire clk,              // CPU clock
+    input wire reset,            // reset signal
+    output wire [15:0]AB,        // address bus
+    input  wire  [7:0]DI,        // data in, read bus
+    output wire  [7:0]DO,        // data out, write bus
+    output wire WE,              // write enable
+    input wire IRQ,              // interrupt request
+    input wire NMI,              // non-maskable interrupt request
+    input wire RDY               // Ready signal. Pauses CPU when RDY=0
+);
 
 /*
  * internal signals
@@ -61,21 +64,18 @@ wire AV;                // ALU overflow flag
 wire AN;                // ALU negative flag
 wire HC;                // ALU half carry
 
-reg  [7:0] AI;          // ALU Input A
-reg  [7:0] BI;          // ALU Input B
-wire [7:0] DI;          // Data In
-wire [7:0] IR;          // Instruction register
-reg  [7:0] DO;          // Data Out
-reg  WE;                // Write Enable
-reg  CI;                // Carry In
-wire CO;                // Carry Out
+logic [7:0] AI;         // ALU Input A
+logic [7:0] BI;         // ALU Input B
+wire  [7:0] IR;         // Instruction register
+logic  CI;              // Carry In
+wire   CO;              // Carry Out
 wire [7:0] PCH = PC[15:8];
 wire [7:0] PCL = PC[7:0];
 
 reg NMI_edge = 0;       // captured NMI edge
 
-reg [1:0] regsel;                       // Select A, X, Y or S register
-wire [7:0] regfile = AXYS[regsel];      // Selected register output
+logic [1:0] regsel;                      // Select A, X, Y or S register
+wire  [7:0] regfile = AXYS[regsel];      // Selected register output
 
 parameter
         SEL_A    = 2'd0,
@@ -107,8 +107,8 @@ reg [5:0] state;
  * control signals
  */
 
-reg PC_inc;             // Increment PC
-reg [15:0] PC_temp;     // intermediate value of PC
+logic PC_inc;           // Increment PC
+logic [15:0] PC_temp;   // intermediate value of PC
 
 reg [1:0] src_reg;      // source register index
 reg [1:0] dst_reg;      // destination register index
@@ -124,12 +124,12 @@ reg compare;            // doing CMP/CPY/CPX
 reg shift;              // doing shift/rotate instruction
 reg rotate;             // doing rotate (no shift)
 reg backwards;          // backwards branch
-reg cond_true;          // branch condition is true
+logic cond_true;        // branch condition is true
 reg [2:0] cond_code;    // condition code bits from instruction
 reg shift_right;        // Instruction ALU shift/rotate right
-reg alu_shift_right;    // Current cycle shift right enable
+logic alu_shift_right;  // Current cycle shift right enable
 reg [3:0] op;           // Main ALU operation for instruction
-reg [3:0] alu_op;       // Current cycle ALU operation
+logic [3:0] alu_op;     // Current cycle ALU operation
 reg adc_bcd;            // ALU should do BCD style carry
 reg adj_bcd;            // results should be BCD adjusted
 
@@ -147,7 +147,6 @@ reg sed;                // set decimal
 reg cli;                // clear interrupt
 reg sei;                // set interrupt
 reg clv;                // clear overflow
-reg brk;                // doing BRK
 
 reg res;                // in reset
 
@@ -364,6 +363,7 @@ parameter
         ZEROPAGE  = 8'h00,
         STACKPAGE = 8'h01;
 
+logic [15:0]ABMUX;
 always @* begin
     unique case( state )
         ABSX1,
@@ -372,19 +372,19 @@ always @* begin
         JMP1,
         JMPI1,
         RTI4,
-        ABS1:           AB = { DI, ADD };
+        ABS1:           ABMUX = { DI, ADD };
 
         BRA2,
         INDY3,
-        ABSX2:          AB = { ADD, ABL };
+        ABSX2:          ABMUX = { ADD, ABL };
 
-        BRA1:           AB = { ABH, ADD };
+        BRA1:           ABMUX = { ABH, ADD };
 
         JSR0,
         PUSH1,
         RTS0,
         RTI0,
-        BRK0:           AB = { STACKPAGE, regfile };
+        BRK0:           ABMUX = { STACKPAGE, regfile };
 
         BRK1,
         JSR1,
@@ -394,23 +394,24 @@ always @* begin
         RTI1,
         RTI2,
         RTI3,
-        BRK2:           AB = { STACKPAGE, ADD };
+        BRK2:           ABMUX = { STACKPAGE, ADD };
 
         INDY1,
         INDX1,
         ZPX1,
-        INDX2:          AB = { ZEROPAGE, ADD };
+        INDX2:          ABMUX = { ZEROPAGE, ADD };
 
         ZP0,
-        INDY0:          AB = { ZEROPAGE, DI };
+        INDY0:          ABMUX = { ZEROPAGE, DI };
 
         REG,
         READ,
-        WRITE:          AB = { ABH, ABL };
+        WRITE:          ABMUX = { ABH, ABL };
 
-        default:        AB = PC;
+        default:        ABMUX = PC;
     endcase
 end
+assign AB = ABMUX;
 
 /*
  * ABH/ABL pair is used for registering previous address bus state.
@@ -429,28 +430,31 @@ end
 /*
  * Data Out MUX
  */
+logic [7:0] DOMUX;
 always @* begin
     unique case( state )
-        WRITE:   DO = ADD;
+        WRITE:   DOMUX = ADD;
 
         JSR0,
-        BRK0:    DO = PCH;
+        BRK0:    DOMUX = PCH;
 
         JSR1,
-        BRK1:    DO = PCL;
+        BRK1:    DOMUX = PCL;
 
-        PUSH1:   DO = php ? P : ADD;
+        PUSH1:   DOMUX = php ? P : ADD;
 
-        BRK2:    DO = (IRQ | NMI_edge) ? (P & 8'b1110_1111) : P;
+        BRK2:    DOMUX = (IRQ | NMI_edge) ? (P & 8'b1110_1111) : P;
 
-        default: DO = regfile;
+        default: DOMUX = regfile;
     endcase
 end
+
+assign DO = DOMUX;
 
 /*
  * Write Enable Generator
  */
-
+logic WEGEN;
 always @* begin
     unique case( state )
         BRK0,   // writing to stack or memory
@@ -459,25 +463,26 @@ always @* begin
         JSR0,
         JSR1,
         PUSH1,
-        WRITE:   WE = 1;
+        WRITE:   WEGEN = 1;
 
         INDX3,  // only if doing a STA, STX or STY
         INDY3,
         ABSX2,
         ABS1,
         ZPX1,
-        ZP0:     WE = store;
+        ZP0:     WEGEN = store;
 
-        default: WE = 0;
+        default: WEGEN = 0;
     endcase
 end
+assign WE = WEGEN;
 
 /*
  * register file, contains A, X, Y and S (stack pointer) registers. At each
  * cycle only 1 of those registers needs to be accessed, so they combined
  * in a small memory, saving resources.
  */
-reg write_register;             // set when register file is written
+logic write_register;             // set when register file is written
 
 always @* begin
     unique case( state )
@@ -502,8 +507,8 @@ always @(posedge clk) begin
         adj_bcd <= adc_sbc & D;     // '1' when doing a BCD instruction
 end
 
-reg [3:0] ADJL;
-reg [3:0] ADJH;
+logic [3:0] ADJL;
+logic [3:0] ADJH;
 
 // adjustment term to be added to ADD[3:0] based on the following
 // adj_bcd: '1' if doing ADC/SBC with D=1
@@ -577,20 +582,22 @@ end
 /*
  * ALU
  */
-alu_6502 alu_inst( .clk(clk),
-         .op(alu_op),
-         .right(alu_shift_right),
-         .AI(AI),
-         .BI(BI),
-         .CI(CI),
-         .BCD(adc_bcd & (state == FETCH)),
-         .CO(CO),
-         .OUT(ADD),
-         .V(AV),
-         .Z(AZ),
-         .N(AN),
-         .HC(HC),
-         .RDY(RDY) );
+alu_6502 alu_inst (
+    .clk   (clk),
+    .op    (alu_op),
+    .right (alu_shift_right),
+    .AI    (AI),
+    .BI    (BI),
+    .CI    (CI),
+    .BCD   (adc_bcd & (state == FETCH)),
+    .CO    (CO),
+    .OUT   (ADD),
+    .V     (AV),
+    .Z     (AZ),
+    .N     (AN),
+    .HC    (HC),
+    .RDY   (RDY)
+);
 
 /*
  * Select current ALU operation
@@ -1248,7 +1255,6 @@ always @(posedge clk ) begin
         clv <= (IR == 8'hb8);
         cld <= (IR == 8'hd8);
         sed <= (IR == 8'hf8);
-        brk <= (IR == 8'h00);
     end
 end
 
