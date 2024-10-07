@@ -25,37 +25,34 @@
  * 1111   AI
  *
  */
+`resetall
+`timescale 1ns/1ps
+`default_nettype none
 
-module alu_6502( clk, op, right, AI, BI, CI, CO, BCD, OUT, V, Z, N, HC, RDY );
-    input clk;
-    input right;
-    input [3:0] op; // operation
-    input [7:0] AI;
-    input [7:0] BI;
-    input CI;
-    input BCD;      // BCD style carry
-    output [7:0] OUT;
-    output CO;
-    output V;
-    output Z;
-    output N;
-    output HC;
-    input RDY;
-
-reg [7:0] OUT;
-reg CO;
-wire V;
-wire Z;
-reg N;
-reg HC;
+module alu_6502 (
+    input  wire clk,
+    input  wire right,
+    input  wire [3:0] op, // operation
+    input  wire [7:0] AI,
+    input  wire [7:0] BI,
+    input  wire CI,
+    input  wire BCD,      // BCD style carry
+    output reg  [7:0] OUT,
+    output reg  CO,
+    output wire V,
+    output wire Z,
+    output reg  N,
+    output reg  HC,
+    input  wire RDY
+);
 
 reg AI7;
 reg BI7;
-reg [8:0] temp_logic;
-reg [7:0] temp_BI;
-reg [4:0] temp_l;
-reg [4:0] temp_h;
-wire [8:0] temp = { temp_h, temp_l[3:0] };
+logic [8:0] temp_logic;
+logic [7:0] temp_BI;
+logic [4:0] temp_l;
+logic [4:0] temp_h;
+wire  [8:0] temp = { temp_h, temp_l[3:0] };
 wire adder_CI = (right | (op[3:2] == 2'b11)) ? 0 : CI;
 
 // calculate the logic operations. The 'case' can be done in 1 LUT per
