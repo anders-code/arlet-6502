@@ -502,7 +502,8 @@ end
  * BCD adjust logic
  */
 always @(posedge clk) begin
-    adj_bcd <= adc_sbc & D;     // '1' when doing a BCD instruction
+    if (RDY)
+        adj_bcd <= adc_sbc & D;     // '1' when doing a BCD instruction
 end
 
 reg [3:0] ADJL;
@@ -756,18 +757,20 @@ end
  * Update C flag when doing ADC/SBC, shift/rotate, compare
  */
 always @(posedge clk ) begin
-    if( shift && state == WRITE )
-        C <= CO;
-    else if( state == RTI2 )
-        C <= DIMUX[0];
-    else if( ~write_back && state == DECODE ) begin
-        if( adc_sbc | shift | compare )
+    if( RDY ) begin
+        if( shift && state == WRITE )
             C <= CO;
-        else if( plp )
-            C <= ADD[0];
-        else begin
-            if( sec ) C <= 1;
-            if( clc ) C <= 0;
+        else if( state == RTI2 )
+            C <= DIMUX[0];
+        else if( ~write_back && state == DECODE ) begin
+            if( adc_sbc || shift || compare )
+                C <= CO;
+            else if( plp )
+                C <= ADD[0];
+            else begin
+                if( sec ) C <= 1;
+                if( clc ) C <= 0;
+            end
         end
     end
 end
@@ -776,57 +779,68 @@ end
  * Update Z, N flags when writing A, X, Y, Memory, or when doing compare
  */
 always @(posedge clk) begin
-    if( state == WRITE )
-        Z <= AZ;
-    else if( state == RTI2 )
-        Z <= DIMUX[1];
-    else if( state == DECODE ) begin
-        if( plp )
-            Z <= ADD[1];
-        else if( (load_reg & (regsel != SEL_S)) | compare | bit_ins )
+    if( RDY ) begin
+        if( state == WRITE )
             Z <= AZ;
+        else if( state == RTI2 )
+            Z <= DIMUX[1];
+        else if( state == DECODE ) begin
+            if( plp )
+                Z <= ADD[1];
+            else if( (load_reg & (regsel != SEL_S)) | compare | bit_ins )
+                Z <= AZ;
+        end
     end
 end
 
 always @(posedge clk) begin
-    if( state == WRITE )
-        N <= AN;
-    else if( state == RTI2 )
-        N <= DIMUX[7];
-    else if( state == DECODE ) begin
-        if( plp )
-            N <= ADD[7];
-        else if( (load_reg & (regsel != SEL_S)) | compare )
+    if( RDY ) begin
+        if( state == WRITE )
             N <= AN;
-    end else if( state == FETCH && bit_ins )
-        N <= DIMUX[7];
+        else if( state == RTI2 )
+            N <= DIMUX[7];
+        else if( state == DECODE ) begin
+            if( plp )
+                N <= ADD[7];
+            else if( (load_reg && (regsel != SEL_S)) || compare )
+                N <= AN;
+        end
+        else if( state == FETCH && bit_ins )
+            N <= DI[7];
+    end
 end
 
 /*
  * Update I flag
  */
 always @(posedge clk) begin
-    if( state == BRK3 )
-        I <= 1;
-    else if( state == RTI2 )
-        I <= DIMUX[2];
-    else if( state == REG ) begin
-        if( sei ) I <= 1;
-        if( cli ) I <= 0;
-    end else if( state == DECODE )
-        if( plp ) I <= ADD[2];
+    if( RDY ) begin
+        if( state == BRK3 )
+            I <= 1;
+        else if( state == RTI2 )
+            I <= DIMUX[2];
+        else if( state == REG ) begin
+            if( sei ) I <= 1;
+            if( cli ) I <= 0;
+        end
+        else if( state == DECODE ) begin
+            if( plp ) I <= ADD[2];
+        end
+    end
 end
 
 /*
  * Update D flag
  */
 always @(posedge clk )begin
-    if( state == RTI2 )
-        D <= DIMUX[3];
-    else if( state == DECODE ) begin
-        if( sed ) D <= 1;
-        if( cld ) D <= 0;
-        if( plp ) D <= ADD[3];
+    if( RDY ) begin
+        if( state == RTI2 )
+            D <= DIMUX[3];
+        else if( state == DECODE ) begin
+            if( sed ) D <= 1;
+            if( cld ) D <= 0;
+            if( plp ) D <= ADD[3];
+        end
     end
 end
 
@@ -834,14 +848,17 @@ end
  * Update V flag
  */
 always @(posedge clk ) begin
-    if( state == RTI2 )
-        V <= DIMUX[6];
-    else if( state == DECODE ) begin
-        if( adc_sbc ) V <= AV;
-        if( clv )     V <= 0;
-        if( plp )     V <= ADD[6];
-    end else if( state == FETCH && bit_ins )
-        V <= DIMUX[6];
+    if( RDY ) begin
+        if( state == RTI2 )
+            V <= DIMUX[6];
+        else if( state == DECODE ) begin
+            if( adc_sbc ) V <= AV;
+            if( clv )     V <= 0;
+            if( plp )     V <= ADD[6];
+        end
+        else if( state == FETCH && bit_ins )
+            V <= DI[6];
+    end
 end
 
 /*
