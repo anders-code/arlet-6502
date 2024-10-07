@@ -18,6 +18,12 @@
  * on the output pads if external memory is required.
  */
 
+`ifdef USE_ASYNC_RESET
+    `define ASYNC_RESET or posedge reset
+`else
+    `define ASYNC_RESET
+`endif
+
 module cpu_6502( clk, reset, AB, DI, DO, WE, IRQ, NMI, RDY );
 
 input clk;              // CPU clock
@@ -847,7 +853,7 @@ end
  * states. In these states, the IR has been prefetched, and there is no
  * time to read the IR again before the next decode.
  */
-always @(posedge clk ) begin
+always @(posedge clk `ASYNC_RESET) begin
     if( reset )
         IRHOLD_valid <= 0;
     else if( RDY ) begin
@@ -872,7 +878,7 @@ assign DIMUX = ~RDY ? DIHOLD : DI;
 /*
  * Microcode state machine
  */
-always @(posedge clk or posedge reset) begin
+always @(posedge clk `ASYNC_RESET) begin
     if( reset )
         state <= BRK0;
     else if( RDY ) begin
@@ -979,7 +985,7 @@ end
 /*
  * Additional control signals
  */
-always @(posedge clk) begin
+always @(posedge clk `ASYNC_RESET) begin
      if( reset )
          res <= 1;
      else if( state == DECODE )
