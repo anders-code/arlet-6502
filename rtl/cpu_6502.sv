@@ -18,14 +18,11 @@
  * on the output pads if external memory is required.
  */
  `resetall
- `timescale 1ns/1ps
  `default_nettype none
 
-`ifdef USE_ASYNC_RESET
-    `define ASYNC_RESET or posedge reset
-`else
-    `define ASYNC_RESET
-`endif
+`include "config.vh"
+`include "timescale.vh"
+`include "async_reset.vh"
 
 module cpu_6502 (
     input wire clk,              // CPU clock
@@ -872,7 +869,7 @@ end
  * states. In these states, the IR has been prefetched, and there is no
  * time to read the IR again before the next decode.
  */
-always @(posedge clk `ASYNC_RESET) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
     if( reset )
         IRHOLD_valid <= 0;
     else if( RDY ) begin
@@ -890,7 +887,7 @@ assign IR = (IRQ & ~I) | NMI_edge ? 8'h00 :
 /*
  * Microcode state machine
  */
-always @(posedge clk `ASYNC_RESET) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
     if( reset )
         state <= BRK0;
     else if( RDY ) begin
@@ -1000,7 +997,7 @@ end
 /*
  * Additional control signals
  */
-always @(posedge clk `ASYNC_RESET) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
      if( reset )
          res <= 1;
      else if( state == DECODE )
@@ -1282,7 +1279,7 @@ always @(posedge clk) begin
     NMI_1 <= NMI;
 end
 
-always @(posedge clk `ASYNC_RESET) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
     if ( reset )
         NMI_edge <= 0;
     else if( NMI_edge && state == BRK3 )

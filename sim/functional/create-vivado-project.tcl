@@ -25,7 +25,7 @@ set sim_utils_dir "${repo_dir}/sim/utils"
 
 set sim_1 [get_filesets "sim_1"]
 add_files -norecurse -fileset ${sim_1} [list \
-    [file normalize "${sim_utils_dir}/tb_clkgen.sv"] \
+    [file normalize "${sim_utils_dir}/tb_clkrst.sv"] \
     [file normalize "${sim_utils_dir}/tb_utils.sv"] \
     [file normalize "${sim_dir}/tb_functional.sv"] \
     [file normalize "${sim_dir}/tb_functional_behav.wcfg"] \

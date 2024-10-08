@@ -26,8 +26,10 @@
  *
  */
 `resetall
-`timescale 1ns/1ps
 `default_nettype none
+
+`include "config.vh"
+`include "timescale.vh"
 
 module alu_6502 (
     input  wire clk,
