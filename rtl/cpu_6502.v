@@ -605,7 +605,7 @@ always @* begin
         REG :   alu_op = op;
 
         DECODE,
-        ABS1:   alu_op = 1'bx;
+        ABS1:   alu_op = 0; // was 1'bx (broken) don't care;
 
         PUSH1,
         BRK0,
@@ -672,7 +672,7 @@ always @* begin
         FETCH:  AI = load_only ? 0 : regfile;
 
         DECODE,
-        ABS1:   AI = 8'hxx;     // don't care
+        ABS1:   AI = 0; // was 8'hxx    // don't care
 
         default:  AI = 0;
     endcase
@@ -705,7 +705,7 @@ always @* begin
          BRA0:  BI = PCL;
 
          DECODE,
-         ABS1:  BI = 8'hxx;
+         ABS1:  BI = 0; // was 8'hxx    // don't care
 
          default:       BI = DI;
     endcase
@@ -721,7 +721,7 @@ always @* begin
         ABSX1:  CI = CO;
 
         DECODE,
-        ABS1:   CI = 1'bx;
+        ABS1:   CI = 0; // was 1'bx     // don't care
 
         READ,
         REG:    CI = rotate ? C :
@@ -740,7 +740,7 @@ always @* begin
         INDY0,
         INDX1:  CI = 1;
 
-        default:        CI = 0;
+        default: CI = 0;
     endcase
 end
 
