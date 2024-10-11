@@ -25,3 +25,8 @@ project*/
 # cmake outputs
 build/
 a.out
+
+# eqy outputs
+/formal/checkcpu/
+/formal/gold/
+/formal/gate/

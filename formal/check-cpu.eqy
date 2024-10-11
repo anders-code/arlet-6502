@@ -1,0 +1,39 @@
+# this was used to check that the casex to casez transform maintained
+# equivalence
+
+[gold]
+read_verilog -sv -formal gold/cpu_6502.sv gold/alu_6502.sv
+hierarchy -check -top cpu_6502
+proc
+memory -nomap
+#prep -top cpu_6502
+
+#memory_map
+
+# leftover from example
+# only keep FF outputs, avoids partitioning on signals that were changed by optimizations
+#rename -hide t:$dff %co x:* %% w:* %D
+
+
+[gate]
+read_verilog -sv -formal gate/cpu_6502.sv gate/alu_6502.sv
+hierarchy -check -top cpu_6502
+proc
+memory -nomap
+#prep -top cpu_6502
+
+[collect cpu_6502.ALU]
+join temp
+
+[collect cpu_6502]
+join P
+join PC*
+
+# would be among the unused signals of the regfile partition which fails without this
+#bind dmem_wdata
+
+[strategy sby]
+use sby
+depth 5
+#engine smtbmc bitwuzla
+engine smtbmc
