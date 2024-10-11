@@ -915,6 +915,8 @@ always @(posedge clk `ASYNC_RESET) begin
                     8'bxxx1_1001:   state <= ABSX0; // odd 9 column
                     8'bxxx1_11xx:   state <= ABSX0; // odd C, D, E, F columns
                     8'bxxxx_1010:   state <= REG;   // <shift> A, TXA, ...  NOP
+
+                    default:        state <= DECODE; // skip invalid
                 endcase
             end
 
