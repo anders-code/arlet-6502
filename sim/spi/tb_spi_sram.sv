@@ -63,7 +63,6 @@ reg [63:0]shift_data;
 initial begin
     if (tb_enable_dumpfile("tb_spi_sram.vcd"))
         $dumpvars(0, tb_spi_sram);
-
     #17 rst  = 1;
         en   = 0;
         cs_n = 1;
@@ -89,7 +88,7 @@ initial begin
         cs_n = 0;
    #640 cs_n = 1;
 
-  #1000 `tb_assert(shift_data[31:0] == 32'h11223344);
+  #1000 `tb_assert(shift_data == 64'h00000000_11223344);
         tb_assert_report;
         $finish(2);
 end
