@@ -1,0 +1,14 @@
+`verilator_config
+
+lint_off -rule UNUSEDSIGNAL -file "*cpu_6502.v" -match "*'A'"
+lint_off -rule UNUSEDSIGNAL -file "*cpu_6502.v" -match "*'X'"
+lint_off -rule UNUSEDSIGNAL -file "*cpu_6502.v" -match "*'Y'"
+lint_off -rule UNUSEDSIGNAL -file "*cpu_6502.v" -match "*'S'"
+lint_off -rule UNUSEDSIGNAL -file "*cpu_6502.v" -match "*'statename'"
+lint_off -rule UNUSEDPARAM  -file "*cpu_6502.v" -match "*'OP_OR'"
+lint_off -rule UNUSEDPARAM  -file "*cpu_6502.v" -match "*'OP_EOR'"
+lint_off -rule WIDTHEXPAND  -file "*cpu_6502.v" -match "*'PC_inc'*"
+
+lint_off -rule WIDTHEXPAND  -file "*alu_6502.v"
+lint_off -rule WIDTHTRUNC   -file "*alu_6502.v"
+

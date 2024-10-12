@@ -36,7 +36,9 @@ verilate(${TARGET}
         -Wall -Wpedantic -Wno-fatal -Werror-USERFATAL -Werror-USERERROR
         --x-assign fast --x-initial fast --trace-underscore
     SOURCES
+        ../../rtl/cfg.vlt
         ${RTL_SOURCES}
+        ../utils/cfg.vlt
         ../utils/tb_utils.sv
         ../utils/tb_clkrst.sv
         tb_functional.sv

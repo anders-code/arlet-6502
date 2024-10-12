@@ -1,0 +1,5 @@
+`verilator_config
+lint_off -rule DECLFILENAME -file "*tb_utils.sv"
+lint_off -rule UNUSEDSIGNAL -file "*tb_utils.sv"
+lint_off -rule UNUSEDSIGNAL -file "*tb_clkrst.sv"
+lint_off -rule UNUSEDPARAM  -file "*tb_clkrst.sv"
