@@ -12,3 +12,5 @@ lint_off -rule WIDTHEXPAND  -file "*cpu_6502.sv" -match "*'PC_inc'*"
 lint_off -rule WIDTHEXPAND  -file "*alu_6502.sv"
 lint_off -rule WIDTHTRUNC   -file "*alu_6502.sv"
 
+lint_off -rule WIDTHTRUNC   -file "*spi_sram_master.sv" -match "*REPLICATE*"
+lint_off -rule WIDTHTRUNC   -file "*spi_sram_slave.sv" -match "*REPLICATE*"
