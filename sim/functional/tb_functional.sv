@@ -5,26 +5,26 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-`include "sim/utils/tb_assert.vh"
 
-module tb_functional();
+module tb_functional (
+    input wire clk,
+    input wire rst
+);
+
+tb_clkrst clkrst_inst (.clk, .rst);
 
 import tb_utils::*;
 
-logic clk;
-logic rst;
-tb_clkgen tb_clkgen_inst( .clk );
-
-logic [15:0]ab;
-logic  [7:0]dout;
-logic  [7:0]din;
-logic       we;
-logic       irq;
-logic       nmi;
-logic       rdy;
+wire  [15:0]ab;
+wire   [7:0]dout;
+wire   [7:0]din;
+wire        we;
+logic       irq = 0;
+logic       nmi = 0;
+logic       rdy = 1;
 
 cpu_6502 cpu_inst (
-  .clk,
+  .clk   (clk),
   .reset (rst),
   .AB    (ab),
   .DI    (din),
@@ -83,12 +83,7 @@ initial begin
 
     if (tb_enable_dumpfile("tb_functional.vcd"))
         $dumpvars(0, tb_functional);
-
-    #17 rst = 1;
-   #100 rst = 0;
-        irq = 0;
-        nmi = 0;
-        rdy = 1;
 end
+
 endmodule
 `resetall
