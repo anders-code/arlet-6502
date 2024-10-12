@@ -986,6 +986,7 @@ always @(posedge clk `ASYNC_RESET) begin
             BRK2    : state <= BRK3;
             BRK3    : state <= JMP0;
 
+            default:  state <= BRK0; // catch x's at init (sim warning only)
         endcase
     end
 end
