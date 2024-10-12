@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_spi_sram_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_spi_sram" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="12,910.001 ns"></ZoomEndTime>
+      <Cursor1Time time="1,440.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="205"></NameColumnWidth>
+      <ValueColumnWidth column_width="158"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="14" />
+   <wvobject type="logic" fp_name="/tb_spi_sram/clki">
+      <obj_property name="ElementShortName">clki</obj_property>
+      <obj_property name="ObjectShortName">clki</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_sram/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_sram/en">
+      <obj_property name="ElementShortName">en</obj_property>
+      <obj_property name="ObjectShortName">en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_sram/cs_n">
+      <obj_property name="ElementShortName">cs_n</obj_property>
+      <obj_property name="ObjectShortName">cs_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_sram/mosi">
+      <obj_property name="ElementShortName">mosi</obj_property>
+      <obj_property name="ObjectShortName">mosi</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_sram/miso">
+      <obj_property name="ElementShortName">miso</obj_property>
+      <obj_property name="ObjectShortName">miso</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_sram/spi_sram_slave_inst/state">
+      <obj_property name="ElementShortName">state[31:0]</obj_property>
+      <obj_property name="ObjectShortName">state[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_sram/mem_addr">
+      <obj_property name="ElementShortName">mem_addr[23:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_addr[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_sram/mem_en">
+      <obj_property name="ElementShortName">mem_en</obj_property>
+      <obj_property name="ObjectShortName">mem_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_sram/mem_wr">
+      <obj_property name="ElementShortName">mem_wr</obj_property>
+      <obj_property name="ObjectShortName">mem_wr</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_sram/mem_wdata">
+      <obj_property name="ElementShortName">mem_wdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_wdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_sram/mem_rdata">
+      <obj_property name="ElementShortName">mem_rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_sram/miso_shift">
+      <obj_property name="ElementShortName">miso_shift</obj_property>
+      <obj_property name="ObjectShortName">miso_shift</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_sram/shift_data">
+      <obj_property name="ElementShortName">shift_data[63:0]</obj_property>
+      <obj_property name="ObjectShortName">shift_data[63:0]</obj_property>
+   </wvobject>
+</wave_config>
