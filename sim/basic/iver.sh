@@ -5,6 +5,6 @@ mkdir -p build/bin
 iverilog -g2012 -grelative-include \
     -o "build/bin/i${TOP}" \
     -Wall -DSIM -I../.. \
-    ../../rtl/*.v  \
+    ../../rtl/[ca]*.sv  \
     ../utils/*.sv  \
     "${TOP}.sv"
