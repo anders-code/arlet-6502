@@ -52,6 +52,7 @@ logic [4:0]counter_reset_val;
 
 logic data_shift;
 logic data_load;
+logic dout_shift;
 
 logic addr_shift;
 logic addr_load_lsb;
@@ -73,6 +74,7 @@ always_comb begin
 
     data_shift = 0;
     data_load  = 0;
+    dout_shift = 0;
 
     addr_shift = 0;
     addr_load_lsb = 0;
@@ -157,6 +159,7 @@ always_comb begin
 
         READ2: begin
             data_shift = 1;
+            dout_shift = 1;
 
             if (cs_n)
                 next_state = DONE;
@@ -169,6 +172,7 @@ always_comb begin
             counter_reset_val = (7-2);
 
             data_shift = 1;
+            dout_shift = 1;
 
             mem_en_sm  = 1;
 
@@ -270,8 +274,10 @@ always_ff @(posedge clk2) begin
     if (en2) begin
         if (data_load)
             dout <= mem_rdata[7];
-        else
+        else if (dout_shift)
             dout <= data[6];
+        else
+            dout <= 0;
     end
 end
 
