@@ -13,16 +13,16 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="37,444,100.833 ns"></ZoomStartTime>
-      <ZoomEndTime time="37,444,359.034 ns"></ZoomEndTime>
-      <Cursor1Time time="37,444,316.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,293.001 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="205"></NameColumnWidth>
-      <ValueColumnWidth column_width="158"></ValueColumnWidth>
+      <ValueColumnWidth column_width="154"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
-   <wvobject type="logic" fp_name="/tb_functional/tb_clkgen_inst/clki">
+   <WVObjectSize size="11" />
+   <wvobject type="logic" fp_name="/tb_functional/clkgen_inst/clki">
       <obj_property name="ElementShortName">clki</obj_property>
       <obj_property name="ObjectShortName">clki</obj_property>
    </wvobject>
@@ -45,10 +45,6 @@
    <wvobject fp_name="divider15" type="divider">
       <obj_property name="label">cpu</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/tb_functional/tb_clkgen_inst/clki">
-      <obj_property name="ElementShortName">clki</obj_property>
-      <obj_property name="ObjectShortName">clki</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/tb_functional/cpu_inst/PC">
       <obj_property name="ElementShortName">PC[15:0]</obj_property>
