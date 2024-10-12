@@ -1,0 +1,35 @@
+[*]
+[*] GTKWave Analyzer v3.3.118 (w)1999-2023 BSI
+[*] Fri Oct 18 23:54:05 2024
+[*]
+[dumpfile] "/home/andy/work/tt09-6502/arlet-6502/sim/spi-functional/tb_spi_functional.vcd"
+[dumpfile_mtime] "Fri Oct 18 23:52:24 2024"
+[dumpfile_size] 33997458
+[savefile] "/home/andy/work/tt09-6502/arlet-6502/sim/spi-functional/tb_spi_functional.gtkw"
+[timestart] 0
+[size] 1000 600
+[pos] 327 594
+*-22.860210 7991000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_spi_functional.
+[sst_width] 273
+[signals_width] 150
+[sst_expanded] 1
+[sst_vpaned_height] 157
+@28
+tb_spi_functional.clkrst_inst.clki
+tb_spi_functional.rst
+tb_spi_functional.rdy
+@22
+tb_spi_functional.cpu_inst.AB[15:0]
+tb_spi_functional.cpu_inst.PC[15:0]
+tb_spi_functional.cpu_inst.DI[7:0]
+tb_spi_functional.cpu_inst.DO[7:0]
+tb_spi_functional.cpu_inst.state[5:0]
+tb_spi_functional.cpu_inst.statename[47:0]
+@28
+tb_spi_functional.cs_n
+tb_spi_functional.mosi
+@29
+tb_spi_functional.miso
+[pattern_trace] 1
+[pattern_trace] 0
