@@ -14,8 +14,8 @@ create_project -force ${proj_name} ${proj_dir}
 set sources_1 [get_filesets "sources_1"]
 
 add_files -norecurse -fileset ${sources_1} [list \
-    [file normalize "${repo_dir}/rtl/alu_6502.v"] \
-    [file normalize "${repo_dir}/rtl/cpu_6502.v"] \
+    [file normalize "${repo_dir}/rtl/alu_6502.sv"] \
+    [file normalize "${repo_dir}/rtl/cpu_6502.sv"] \
 ]
 
 set_property -obj ${sources_1} "include_dirs" ${repo_dir}

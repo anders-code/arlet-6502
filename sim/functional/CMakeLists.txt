@@ -15,7 +15,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${LIB_DIR})
 find_package(verilator 5 HINTS $ENV{VERILATOR_ROOT} REQUIRED)
 
 file(GLOB RTL_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-    ../../rtl/*.v
+    ../../rtl/*.sv
 )
 
 set(TARGET tb_functional)
