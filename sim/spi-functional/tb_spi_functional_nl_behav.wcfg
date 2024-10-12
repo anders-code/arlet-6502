@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_spi_functional_nl_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_spi_functional_nl" />
+            <top_module name="tb_utils" />
+            <top_module name="tb_utils_private" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,352.001 ns"></ZoomEndTime>
+      <Cursor1Time time="0.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="205"></NameColumnWidth>
+      <ValueColumnWidth column_width="150"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="26" />
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/ui_in">
+      <obj_property name="ElementShortName">ui_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ui_in[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/uo_out">
+      <obj_property name="ElementShortName">uo_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">uo_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/uio_in">
+      <obj_property name="ElementShortName">uio_in[7:0]</obj_property>
+      <obj_property name="ObjectShortName">uio_in[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/uio_out">
+      <obj_property name="ElementShortName">uio_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">uio_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/uio_oe">
+      <obj_property name="ElementShortName">uio_oe[7:0]</obj_property>
+      <obj_property name="ObjectShortName">uio_oe[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/cs_n">
+      <obj_property name="ElementShortName">cs_n</obj_property>
+      <obj_property name="ObjectShortName">cs_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/mosi">
+      <obj_property name="ElementShortName">mosi</obj_property>
+      <obj_property name="ObjectShortName">mosi</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/miso">
+      <obj_property name="ElementShortName">miso</obj_property>
+      <obj_property name="ObjectShortName">miso</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/irq">
+      <obj_property name="ElementShortName">irq</obj_property>
+      <obj_property name="ObjectShortName">irq</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/nmi">
+      <obj_property name="ElementShortName">nmi</obj_property>
+      <obj_property name="ObjectShortName">nmi</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/mem_addr">
+      <obj_property name="ElementShortName">mem_addr[23:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_addr[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/mem_en">
+      <obj_property name="ElementShortName">mem_en</obj_property>
+      <obj_property name="ObjectShortName">mem_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_nl/mem_wr">
+      <obj_property name="ElementShortName">mem_wr</obj_property>
+      <obj_property name="ObjectShortName">mem_wr</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/mem_wdata">
+      <obj_property name="ElementShortName">mem_wdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_wdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/mem_rdata">
+      <obj_property name="ElementShortName">mem_rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/tc">
+      <obj_property name="ElementShortName">tc[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tc[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/PC">
+      <obj_property name="ElementShortName">PC[15:0]</obj_property>
+      <obj_property name="ObjectShortName">PC[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/lasttc">
+      <obj_property name="ElementShortName">lasttc[7:0]</obj_property>
+      <obj_property name="ObjectShortName">lasttc[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/lasttm">
+      <obj_property name="ElementShortName">lasttm[63:0]</obj_property>
+      <obj_property name="ObjectShortName">lasttm[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/lasttm2">
+      <obj_property name="ElementShortName">lasttm2[63:0]</obj_property>
+      <obj_property name="ObjectShortName">lasttm2[63:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional_nl/PC">
+      <obj_property name="ElementShortName">PC[15:0]</obj_property>
+      <obj_property name="ObjectShortName">PC[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="VirtualBus">
+      <obj_property name="label">AB</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Reversed">true</obj_property>
+      <obj_property name="ElementShortName">VirtualBus[]</obj_property>
+      <obj_property name="ObjectShortName">VirtualBus[]</obj_property>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABL[0] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABL[0] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABL[0] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABL[1] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABL[1] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABL[1] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABL[2] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABL[2] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABL[2] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABL[3] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABL[3] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABL[3] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABL[4] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABL[4] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABL[4] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABL[5] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABL[5] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABL[5] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABL[6] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABL[6] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABL[6] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABL[7] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABL[7] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABL[7] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABH[0] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABH[0] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABH[0] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABH[1] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABH[1] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABH[1] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABH[2] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABH[2] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABH[2] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABH[3] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABH[3] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABH[3] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABH[4] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABH[4] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABH[4] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABH[5] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABH[5] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABH[5] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABH[6] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABH[6] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABH[6] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.ABH[7] ">
+         <obj_property name="ElementShortName">\cpu_inst.ABH[7] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.ABH[7] </obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="VirtualBus">
+      <obj_property name="label">cpu state</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Reversed">true</obj_property>
+      <obj_property name="ElementShortName">VirtualBus[]</obj_property>
+      <obj_property name="ObjectShortName">VirtualBus[]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.state[0] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[0] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[0] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.state[1] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[1] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[1] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.state[2] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[2] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[2] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.state[3] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[3] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[3] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.state[4] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[4] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[4] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\cpu_inst.state[5] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[5] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[5] </obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="VirtualBus">
+      <obj_property name="label">spi state</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Reversed">true</obj_property>
+      <obj_property name="ElementShortName">VirtualBus[]</obj_property>
+      <obj_property name="ObjectShortName">VirtualBus[]</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\spi_sram_master_inst.state[0] ">
+         <obj_property name="ElementShortName">\spi_sram_master_inst.state[0] </obj_property>
+         <obj_property name="ObjectShortName">\spi_sram_master_inst.state[0] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\spi_sram_master_inst.state[1] ">
+         <obj_property name="ElementShortName">\spi_sram_master_inst.state[1] </obj_property>
+         <obj_property name="ObjectShortName">\spi_sram_master_inst.state[1] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\spi_sram_master_inst.state[2] ">
+         <obj_property name="ElementShortName">\spi_sram_master_inst.state[2] </obj_property>
+         <obj_property name="ObjectShortName">\spi_sram_master_inst.state[2] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_nl/tt_6502_inst/\spi_sram_master_inst.state[3] ">
+         <obj_property name="ElementShortName">\spi_sram_master_inst.state[3] </obj_property>
+         <obj_property name="ObjectShortName">\spi_sram_master_inst.state[3] </obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

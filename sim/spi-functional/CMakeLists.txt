@@ -47,3 +47,38 @@ verilate(${TARGET}
 
 target_compile_definitions(${TARGET} PRIVATE VTB=${PREFIX})
 target_compile_options(${TARGET} PRIVATE -g3)
+
+
+set(TARGET tb_spi_functional_nl)
+set(PREFIX V${TARGET})
+
+add_executable(${TARGET} ../utils/verilator_main.cpp)
+
+verilate(${TARGET}
+    TOP_MODULE     ${TARGET}
+    PREFIX         ${PREFIX}
+    THREADS        0
+    TRACE_FST      1
+    OPT_SLOW       -O3
+    OPT_FAST       -O3
+    OPT_GLOBAL     -O3
+    VERILATOR_ARGS
+        --relative-includes -DSIM=1
+        -DFUNCTIONAL=1 -DUNIT_DELAY=
+        -Wall -Wpedantic -Wno-fatal -Werror-USERFATAL -Werror-USERERROR
+        --x-assign fast --x-initial fast --trace-underscore
+    SOURCES
+        cfg.vlt
+        ../../rtl/cfg.vlt
+        ../../rtl/spi_sram_slave.sv
+        primitives_v.v
+        sky130_fd_sc_hd.v
+        tt_um_anders_tt_6502.nl.v
+        ../utils/cfg.vlt
+        ../utils/tb_utils.sv
+        ../utils/tb_clkrst.sv
+        tb_spi_functional_nl.sv
+)
+
+target_compile_definitions(${TARGET} PRIVATE VTB=${PREFIX})
+target_compile_options(${TARGET} PRIVATE -g3)

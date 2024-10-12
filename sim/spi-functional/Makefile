@@ -4,7 +4,7 @@ BUILD_DIR = $(THIS_DIR)/build
 CMAKE_DIR = $(BUILD_DIR)/cmake
 BIN_DIR = $(OUT_DIR)/bin
 
-DEFAULT_TARGETS = tb_spi_functional
+DEFAULT_TARGETS = tb_spi_functional tb_spi_functional_nl
 
 PHONIES = all configure reconfigure clean
 
