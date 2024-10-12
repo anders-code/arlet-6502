@@ -48,5 +48,21 @@ package tb_utils;
             return {base, "/", file};
         return file;
     endfunction
+
+    function automatic bit tb_enable_dumpfile(
+            input string defname="waveform.vcd");
+
+        if ($test$plusargs("dumpfile") != 0) begin
+            string name;
+            if (!$value$plusargs("dumpfile=%s", name))
+                name = defname;
+            $display("tracing to %s...", name);
+            $dumpfile(name);
+            return 1;
+        end
+        else
+            return 0;
+    endfunction
+
 endpackage
 `resetall
