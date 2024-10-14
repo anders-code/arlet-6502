@@ -1265,8 +1265,10 @@ always @(posedge clk) begin
     NMI_1 <= NMI;
 end
 
-always @(posedge clk ) begin
-    if( NMI_edge && state == BRK3)
+always @(posedge clk `ASYNC_RESET) begin
+    if ( reset )
+        NMI_edge <= 0;
+    else if( NMI_edge && state == BRK3 )
         NMI_edge <= 0;
     else if( NMI & ~NMI_1 )
         NMI_edge <= 1;
