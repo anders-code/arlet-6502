@@ -12,7 +12,7 @@
 [sst_expanded] 1
 [sst_vpaned_height] 269
 @28
-TOP.tb_functional.tb_clkgen_inst.clki
+TOP.tb_functional.clk
 TOP.tb_functional.rst
 TOP.tb_functional.cpu_inst.RDY
 @22

@@ -104,11 +104,15 @@ always @(posedge clk) begin
     end
 
     // Arlet's core runs PC one cycle early so PC is 3469+1 when executing 3469
-    if (cpu_inst.PC == 'h3469+1) begin
+    if (rdy && cpu_inst.PC == 'h3469+1) begin
         // http://forum.6502.org/viewtopic.php?f=8&t=6202#p90723
         // 10 cycles of reset + 6 cycles before executing 0400
+        // first cycle where PC == 400+1 and state == DECODE and RDY is 2710:
+        //   1st cycle is 41 clks, rest are 44
+        //   10 + 41 + 5*44 == 271
         if (termcnt == 0)
-            $display("\nSuccess! cycles %0d (ideal 96241364)\n", $time/10 - 16);
+            $display("\nSuccess! clocks %0d cycles %0d (ideal 96241364)\n",
+                $time/10 - 271, ($time/10 - 271)/44);
         else if (termcnt >= 2)
             $finish(2);
 

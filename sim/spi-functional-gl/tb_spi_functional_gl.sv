@@ -108,7 +108,7 @@ always @(posedge clk) begin
         // http://forum.6502.org/viewtopic.php?f=8&t=6202#p90723
         // 10 cycles of reset + 6 cycles before executing 0400 
         if (termcnt == 0)
-            $display("\nSuccess! cycles %0d (ideal 96241364)\n", $time/10 - 16);
+            $display("\nSuccess! cycles %0d (ideal 96241364)\n", $time/10 - 271);
         else if (termcnt >= 2)
             $finish(2);
 
@@ -117,17 +117,12 @@ always @(posedge clk) begin
 end
 
 initial begin
-    $readmemh(tb_rel_path("../sim/mem-files/6502_functional_test.mem"), mem, 0, $size(mem)-1);
+    $readmemh(tb_rel_path("../mem-files/6502_functional_test.mem"), mem, 0, $size(mem)-1);
     mem['hfffc] = 8'h00;
     mem['hfffd] = 8'h04;
     
-    if ($test$plusargs("trace") != 0) begin
-        static string tracefile = "tb_spi_functional_nl.vcd";
-        $value$plusargs("tracefile=%s", tracefile);
-        $display("tracing to %s...", tracefile);
-        $dumpfile(tracefile);
-        $dumpvars(100, tb_spi_functional_nl);
-    end
+    if(tb_enable_dumpfile("tb_spi_functional_gl.vcd"))
+        $dumpvars(0, tb_spi_functional_gl);
 end
 
 endmodule
