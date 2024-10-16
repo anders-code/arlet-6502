@@ -1,0 +1,13 @@
+`verilator_config
+
+lint_off -rule DECLFILENAME -file "primitives_behav.sv"
+lint_off -rule UNUSEDSIGNAL -file "primitives_behav.sv"
+
+lint_off -rule DECLFILENAME -file "sky130_fd_sc_hd.v"
+lint_off -rule UNUSEDSIGNAL -file "sky130_fd_sc_hd.v"
+lint_off -rule PINNOCONNECT -file "sky130_fd_sc_hd.v"
+
+lint_off -rule PINMISSING   -file "tt_um_anders_tt_6502.pnl.v"
+lint_off -rule UNUSEDSIGNAL -file "tt_um_anders_tt_6502.pnl.v"
+
+lint_off -rule UNUSEDSIGNAL -file "tb_spi_functional_gl.sv"
