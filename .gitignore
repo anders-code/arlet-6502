@@ -30,3 +30,7 @@ a.out
 /formal/checkcpu/
 /formal/gold/
 /formal/gate/
+
+# gate-level netlist and pdk models
+tt_um_anders_tt_6502.pnl.v
+sky130_fd_sc_hd.v
