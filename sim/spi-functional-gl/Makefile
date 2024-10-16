@@ -17,10 +17,15 @@ GATE_DIR ?= $(THIS_DIR)/../../../runs/wokwi/final/pnl
 GATE_SRCS  = tt_um_anders_tt_6502.pnl.v
 
 PHONIES += copy-sources clean-sources
-MAKE_TARGETS += $(GATE_SRCS) $(PDK_SRCS)
+UNPHONIES += $(GATE_SRCS) $(PDK_SRCS)
+
+ifeq ($(wildcard $(GATE_DIR)/$(GATE_SRCS)),)
+$(info Cannot find: $(GATE_DIR:$(THIS_DIR)/%=%)/$(GATE_SRCS))
+$(error Sim cannot be built until design is locally hardened)
+endif
 
 
-TARGETS = $(filter-out $(MAKE_TARGETS) $(PHONIES),$(MAKECMDGOALS))
+TARGETS = $(filter-out $(PHONIES) $(UNPHONIES),$(MAKECMDGOALS))
 ifeq ($(TARGETS),)
     TARGETS = $(DEFAULT_TARGETS)
 endif
@@ -45,7 +50,7 @@ configure: $(CMAKE_DIR)/CMakeCache.txt
 reconfigure $(CMAKE_DIR)/CMakeCache.txt:
 	cmake -B $(CMAKE_DIR) -S $(THIS_DIR) -GNinja $(CMAKE_DEBUG) || rm -f $(CMAKE_DIR)/CMakeCache.txt
 
-$(TARGETS): configure
+$(TARGETS): configure copy-sources
 	cmake --build $(CMAKE_DIR) -- $(TARGETS)
 
 clean: clean-sources

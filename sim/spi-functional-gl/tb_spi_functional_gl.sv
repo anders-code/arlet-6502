@@ -116,37 +116,11 @@ always @(posedge clk) begin
     end
 end
 
-wire [7:0]IRHOLD = {
-tt_6502_inst.\cpu_inst.IRHOLD[7] , tt_6502_inst.\cpu_inst.IRHOLD[6] , tt_6502_inst.\cpu_inst.IRHOLD[5] , tt_6502_inst.\cpu_inst.IRHOLD[4] ,
-tt_6502_inst.\cpu_inst.IRHOLD[3] , tt_6502_inst.\cpu_inst.IRHOLD[2] , tt_6502_inst.\cpu_inst.IRHOLD[1] , tt_6502_inst.\cpu_inst.IRHOLD[0]
-};
-wire [7:0]DI = {
-tt_6502_inst.\cpu_inst.DI[7] , tt_6502_inst.\cpu_inst.DI[6] , tt_6502_inst.\cpu_inst.DI[5] , tt_6502_inst.\cpu_inst.DI[4] ,
-tt_6502_inst.\cpu_inst.DI[3] , tt_6502_inst.\cpu_inst.DI[2] , tt_6502_inst.\cpu_inst.DI[1] , tt_6502_inst.\cpu_inst.DI[0]
-};
-                   
-wire f1 = (irq & ~tt_6502_inst.\cpu_inst.I );
-wire f2 = (irq & ~tt_6502_inst.\cpu_inst.I ) | tt_6502_inst.\cpu_inst.NMI_edge ;
-wire [7:0]IR = (irq & ~tt_6502_inst.\cpu_inst.I ) | tt_6502_inst.\cpu_inst.NMI_edge ? 8'h00 :
-                     tt_6502_inst.\cpu_inst.IRHOLD_valid ? IRHOLD : DI;
-                     
-wire [7:0]f3 = ((irq & ~tt_6502_inst.\cpu_inst.I ) | tt_6502_inst.\cpu_inst.NMI_edge !== 0) ? 8'h00 : 8'haa;
-
 initial begin
-    $readmemh(tb_rel_path("../../arlet-6502/sim/mem-files/6502_functional_test.mem"), mem, 0, $size(mem)-1);
+    $readmemh(tb_rel_path("../sim/mem-files/6502_functional_test.mem"), mem, 0, $size(mem)-1);
     mem['hfffc] = 8'h00;
     mem['hfffd] = 8'h04;
     
-//    tt_6502_inst._1802_.dff0.Q = 0;
-//    tt_6502_inst._1843_.dff0.Q = 0;
-//    tt_6502_inst._1844_.dff0.Q = 0;
-//    tt_6502_inst._1845_.dff0.Q = 0;
-//    tt_6502_inst._1846_.dff0.Q = 0;
-//    tt_6502_inst._1847_.dff0.Q = 0;
-//    tt_6502_inst._1848_.dff0.Q = 0;
-//    tt_6502_inst._1849_.dff0.Q = 0;
-//    tt_6502_inst._1840_.dff0.Q = 0;
-
     if ($test$plusargs("trace") != 0) begin
         static string tracefile = "tb_spi_functional_nl.vcd";
         $value$plusargs("tracefile=%s", tracefile);

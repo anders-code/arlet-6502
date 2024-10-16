@@ -18,7 +18,7 @@ find_package(verilator 5 HINTS $ENV{VERILATOR_ROOT} REQUIRED)
 set(TARGET tb_spi_functional_gl)
 set(PREFIX V${TARGET})
 
-add_executable(${TARGET} ../../arlet-6502/sim/utils/verilator_main.cpp)
+add_executable(${TARGET} ../utils/verilator_main.cpp)
 
 verilate(${TARGET}
     TOP_MODULE     ${TARGET}
@@ -35,14 +35,14 @@ verilate(${TARGET}
         --x-assign fast --x-initial fast --trace-underscore
     SOURCES
         cfg.vlt
-        ../../arlet-6502/rtl/cfg.vlt
-        ../../arlet-6502/rtl/spi_sram_slave.sv
         primitives_behav.v
         sky130_fd_sc_hd.v
         tt_um_anders_tt_6502.pnl.v
-        ../../arlet-6502/sim/utils/cfg.vlt
-        ../../arlet-6502/sim/utils/tb_utils.sv
-        ../../arlet-6502/sim/utils/tb_clkrst.sv
+        ../../rtl/cfg.vlt
+        ../../rtl/spi_sram_slave.sv
+        ../utils/cfg.vlt
+        ../utils/tb_utils.sv
+        ../utils/tb_clkrst.sv
         tb_spi_functional_gl.sv
 )
 
