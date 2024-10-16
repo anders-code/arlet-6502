@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_spi_functional_gl.wdb" id="1">
+         <top_modules>
+            <top_module name="tb_spi_functional_gl" />
+            <top_module name="tb_utils" />
+            <top_module name="tb_utils_private" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="5,706.001 ns"></ZoomEndTime>
+      <Cursor1Time time="201.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="205"></NameColumnWidth>
+      <ValueColumnWidth column_width="138"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="45" />
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/rst">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.RDY ">
+      <obj_property name="ElementShortName">\cpu_inst.RDY </obj_property>
+      <obj_property name="ObjectShortName">\cpu_inst.RDY </obj_property>
+   </wvobject>
+   <wvobject type="vbus" fp_name="VirtualBus">
+      <obj_property name="label">AB</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Reversed">true</obj_property>
+      <obj_property name="ElementShortName">VirtualBus[]</obj_property>
+      <obj_property name="ObjectShortName">VirtualBus[]</obj_property>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[0] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[0] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[0] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[1] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[1] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[1] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[2] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[2] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[2] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[3] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[3] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[3] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[4] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[4] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[4] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[5] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[5] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[5] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[6] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[6] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[6] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[7] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[7] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[7] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[8] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[8] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[8] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[9] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[9] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[9] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[10] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[10] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[10] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[11] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[11] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[11] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[12] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[12] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[12] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[13] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[13] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[13] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[14] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[14] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[14] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.AB[15] ">
+         <obj_property name="ElementShortName">\cpu_inst.AB[15] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.AB[15] </obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="VirtualBus">
+      <obj_property name="label">PC</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Reversed">true</obj_property>
+      <obj_property name="ElementShortName">VirtualBus[]</obj_property>
+      <obj_property name="ObjectShortName">VirtualBus[]</obj_property>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[0] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[0] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[0] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[1] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[1] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[1] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[2] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[2] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[2] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[3] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[3] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[3] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[4] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[4] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[4] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[5] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[5] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[5] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[6] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[6] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[6] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[7] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[7] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[7] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[8] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[8] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[8] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[9] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[9] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[9] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[10] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[10] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[10] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[11] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[11] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[11] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[12] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[12] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[12] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[13] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[13] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[13] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[14] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[14] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[14] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.PC[15] ">
+         <obj_property name="ElementShortName">\cpu_inst.PC[15] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.PC[15] </obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="VirtualBus">
+      <obj_property name="label">DI</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Reversed">true</obj_property>
+      <obj_property name="ElementShortName">VirtualBus[]</obj_property>
+      <obj_property name="ObjectShortName">VirtualBus[]</obj_property>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.DI[0] ">
+         <obj_property name="ElementShortName">\cpu_inst.DI[0] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.DI[0] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.DI[1] ">
+         <obj_property name="ElementShortName">\cpu_inst.DI[1] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.DI[1] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.DI[2] ">
+         <obj_property name="ElementShortName">\cpu_inst.DI[2] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.DI[2] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.DI[3] ">
+         <obj_property name="ElementShortName">\cpu_inst.DI[3] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.DI[3] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.DI[4] ">
+         <obj_property name="ElementShortName">\cpu_inst.DI[4] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.DI[4] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.DI[5] ">
+         <obj_property name="ElementShortName">\cpu_inst.DI[5] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.DI[5] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.DI[6] ">
+         <obj_property name="ElementShortName">\cpu_inst.DI[6] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.DI[6] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.DI[7] ">
+         <obj_property name="ElementShortName">\cpu_inst.DI[7] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.DI[7] </obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="vbus" fp_name="VirtualBus">
+      <obj_property name="label">state</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="Reversed">true</obj_property>
+      <obj_property name="ElementShortName">VirtualBus[]</obj_property>
+      <obj_property name="ObjectShortName">VirtualBus[]</obj_property>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.state[0] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[0] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[0] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.state[1] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[1] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[1] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.state[2] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[2] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[2] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.state[3] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[3] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[3] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.state[4] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[4] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[4] </obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/\cpu_inst.state[5] ">
+         <obj_property name="ElementShortName">\cpu_inst.state[5] </obj_property>
+         <obj_property name="ObjectShortName">\cpu_inst.state[5] </obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cs_n">
+      <obj_property name="ElementShortName">cs_n</obj_property>
+      <obj_property name="ObjectShortName">cs_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/mosi">
+      <obj_property name="ElementShortName">mosi</obj_property>
+      <obj_property name="ObjectShortName">mosi</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/miso">
+      <obj_property name="ElementShortName">miso</obj_property>
+      <obj_property name="ObjectShortName">miso</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/GCLK">
+      <obj_property name="ElementShortName">GCLK</obj_property>
+      <obj_property name="ObjectShortName">GCLK</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/GATE">
+      <obj_property name="ElementShortName">GATE</obj_property>
+      <obj_property name="ObjectShortName">GATE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/CLK">
+      <obj_property name="ElementShortName">CLK</obj_property>
+      <obj_property name="ObjectShortName">CLK</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/VPWR">
+      <obj_property name="ElementShortName">VPWR</obj_property>
+      <obj_property name="ObjectShortName">VPWR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/VGND">
+      <obj_property name="ElementShortName">VGND</obj_property>
+      <obj_property name="ObjectShortName">VGND</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/VPB">
+      <obj_property name="ElementShortName">VPB</obj_property>
+      <obj_property name="ObjectShortName">VPB</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/VNB">
+      <obj_property name="ElementShortName">VNB</obj_property>
+      <obj_property name="ObjectShortName">VNB</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/m0">
+      <obj_property name="ElementShortName">m0</obj_property>
+      <obj_property name="ObjectShortName">m0</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/clkn">
+      <obj_property name="ElementShortName">clkn</obj_property>
+      <obj_property name="ObjectShortName">clkn</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/CLK_delayed">
+      <obj_property name="ElementShortName">CLK_delayed</obj_property>
+      <obj_property name="ObjectShortName">CLK_delayed</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/GATE_delayed">
+      <obj_property name="ElementShortName">GATE_delayed</obj_property>
+      <obj_property name="ObjectShortName">GATE_delayed</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/notifier">
+      <obj_property name="ElementShortName">notifier</obj_property>
+      <obj_property name="ObjectShortName">notifier</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/awake">
+      <obj_property name="ElementShortName">awake</obj_property>
+      <obj_property name="ObjectShortName">awake</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/dlatch0/Q">
+      <obj_property name="ElementShortName">Q</obj_property>
+      <obj_property name="ObjectShortName">Q</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/dlatch0/D">
+      <obj_property name="ElementShortName">D</obj_property>
+      <obj_property name="ObjectShortName">D</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/dlatch0/GATE">
+      <obj_property name="ElementShortName">GATE</obj_property>
+      <obj_property name="ObjectShortName">GATE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/dlatch0/NOTIFIER">
+      <obj_property name="ElementShortName">NOTIFIER</obj_property>
+      <obj_property name="ObjectShortName">NOTIFIER</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/dlatch0/VPWR">
+      <obj_property name="ElementShortName">VPWR</obj_property>
+      <obj_property name="ObjectShortName">VPWR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/_1967_/dlatch0/VGND">
+      <obj_property name="ElementShortName">VGND</obj_property>
+      <obj_property name="ObjectShortName">VGND</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/clkbuf_0_clk/X">
+      <obj_property name="ElementShortName">X</obj_property>
+      <obj_property name="ObjectShortName">X</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/clkbuf_0_clk/A">
+      <obj_property name="ElementShortName">A</obj_property>
+      <obj_property name="ObjectShortName">A</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/clkbuf_0_clk/VPWR">
+      <obj_property name="ElementShortName">VPWR</obj_property>
+      <obj_property name="ObjectShortName">VPWR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/clkbuf_0_clk/VGND">
+      <obj_property name="ElementShortName">VGND</obj_property>
+      <obj_property name="ObjectShortName">VGND</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/clkbuf_0_clk/VPB">
+      <obj_property name="ElementShortName">VPB</obj_property>
+      <obj_property name="ObjectShortName">VPB</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/clkbuf_0_clk/VNB">
+      <obj_property name="ElementShortName">VNB</obj_property>
+      <obj_property name="ObjectShortName">VNB</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/clkbuf_0_clk/buf0_out_X">
+      <obj_property name="ElementShortName">buf0_out_X</obj_property>
+      <obj_property name="ObjectShortName">buf0_out_X</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/tt_6502_inst/clkbuf_0_clk/pwrgood_pp0_out_X">
+      <obj_property name="ElementShortName">pwrgood_pp0_out_X</obj_property>
+      <obj_property name="ObjectShortName">pwrgood_pp0_out_X</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cc/X">
+      <obj_property name="ElementShortName">X</obj_property>
+      <obj_property name="ObjectShortName">X</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cc/A">
+      <obj_property name="ElementShortName">A</obj_property>
+      <obj_property name="ObjectShortName">A</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cc/VPWR">
+      <obj_property name="ElementShortName">VPWR</obj_property>
+      <obj_property name="ObjectShortName">VPWR</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cc/VGND">
+      <obj_property name="ElementShortName">VGND</obj_property>
+      <obj_property name="ObjectShortName">VGND</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cc/VPB">
+      <obj_property name="ElementShortName">VPB</obj_property>
+      <obj_property name="ObjectShortName">VPB</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cc/VNB">
+      <obj_property name="ElementShortName">VNB</obj_property>
+      <obj_property name="ObjectShortName">VNB</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cc/buf0_out_X">
+      <obj_property name="ElementShortName">buf0_out_X</obj_property>
+      <obj_property name="ObjectShortName">buf0_out_X</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional_gl/cc/pwrgood_pp0_out_X">
+      <obj_property name="ElementShortName">pwrgood_pp0_out_X</obj_property>
+      <obj_property name="ObjectShortName">pwrgood_pp0_out_X</obj_property>
+   </wvobject>
+</wave_config>

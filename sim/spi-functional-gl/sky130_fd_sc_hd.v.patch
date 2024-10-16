@@ -1,0 +1,90 @@
+--- sky130_fd_sc_hd.v	2024-10-18 19:23:25.211707978 -0700
++++ sky130_fd_sc_hd.v.fix	2024-10-18 19:19:23.182380167 -0700
+@@ -15,7 +15,11 @@
+  *
+  * SPDX-License-Identifier: Apache-2.0
+  */
+-
++`resetall
++`ifndef UNIT_DELAY
++    `define UNIT_DELAY #(1)
++`endif
++ 
+ `ifndef SKY130_EF_SC_HD__DECAP_12_V
+ `define SKY130_EF_SC_HD__DECAP_12_V
+ 
+@@ -40871,13 +40875,13 @@
+     input  VNB ;
+ 
+     // Local signals
+-    wire pullup0_out_HI  ;
+-    wire pulldown0_out_LO;
++    wire pullup0_out_HI  = 1'b1;
++    wire pulldown0_out_LO = 1'b0;
+ 
+     //                                Name         Output            Other arguments
+-    pullup                            pullup0     (pullup0_out_HI  );
++    //pullup                            pullup0     (pullup0_out_HI  );
+     sky130_fd_sc_hd__udp_pwrgood_pp$P pwrgood_pp0 (HI              , pullup0_out_HI, VPWR  );
+-    pulldown                          pulldown0   (pulldown0_out_LO);
++    //pulldown                          pulldown0   (pulldown0_out_LO);
+     sky130_fd_sc_hd__udp_pwrgood_pp$G pwrgood_pp1 (LO              , pulldown0_out_LO, VGND);
+ 
+ endmodule
+@@ -40935,13 +40939,13 @@
+     input  VNB ;
+ 
+     // Local signals
+-    wire pullup0_out_HI  ;
+-    wire pulldown0_out_LO;
++    wire pullup0_out_HI = 1'b1;
++    wire pulldown0_out_LO = 1'b0;
+ 
+     //                                Name         Output            Other arguments
+-    pullup                            pullup0     (pullup0_out_HI  );
++    //pullup                            pullup0     (pullup0_out_HI  );
+     sky130_fd_sc_hd__udp_pwrgood_pp$P pwrgood_pp0 (HI              , pullup0_out_HI, VPWR  );
+-    pulldown                          pulldown0   (pulldown0_out_LO);
++    //pulldown                          pulldown0   (pulldown0_out_LO);
+     sky130_fd_sc_hd__udp_pwrgood_pp$G pwrgood_pp1 (LO              , pulldown0_out_LO, VGND);
+ 
+ endmodule
+@@ -40991,10 +40995,12 @@
+     // Module ports
+     output HI;
+     output LO;
++    assign HI = 1'b1;
++    assign LO = 1'b0;
+ 
+     //       Name       Output
+-    pullup   pullup0   (HI    );
+-    pulldown pulldown0 (LO    );
++    //pullup   pullup0   (HI    );
++    //pulldown pulldown0 (LO    );
+ 
+ endmodule
+ `endcelldefine
+@@ -41045,10 +41051,12 @@
+     supply0 VGND;
+     supply1 VPB ;
+     supply0 VNB ;
++    assign HI = 1'b1;
++    assign LO = 1'b0;
+ 
+     //       Name       Output
+-    pullup   pullup0   (HI    );
+-    pulldown pulldown0 (LO    );
++    //pullup   pullup0   (HI    );
++    //pulldown pulldown0 (LO    );
+ 
+ endmodule
+ `endcelldefine
+@@ -68484,7 +68492,7 @@
+     input SHORT;
+ 
+ specify
+-(SHORT => VPWR) = (0:0:0,0:0:0,0:0:0,0:0:0,0:0:0,0:0:0);
++//(SHORT => VPWR) = (0:0:0,0:0:0,0:0:0,0:0:0,0:0:0,0:0:0);
+ endspecify
+ endmodule
+ `endcelldefine
