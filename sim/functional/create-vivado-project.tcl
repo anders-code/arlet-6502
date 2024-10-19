@@ -32,6 +32,6 @@ add_files -norecurse -fileset ${sim_1} [list \
 ]
 
 set_property -obj ${sim_1} "include_dirs" ${repo_dir}
-set_property -obj ${sim_1} "verilog_define" "SIM=1"
+set_property -obj ${sim_1} "verilog_define" "CONFIG_TT=1 SIM=1"
 set_property -obj ${sim_1} "top" "tb_functional"
 set_property -obj ${sim_1} "xsim.more_options" {\-testplusarg basedir=../../../../..}
