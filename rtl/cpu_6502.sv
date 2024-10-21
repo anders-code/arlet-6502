@@ -25,15 +25,18 @@
 `include "async_reset.vh"
 
 module cpu_6502 (
-    input wire clk,              // CPU clock
-    input wire reset,            // reset signal
+    input  wire clk,             // CPU clock
+    input  wire reset,           // reset signal
     output wire [15:0]AB,        // address bus
     input  wire  [7:0]DI,        // data in, read bus
     output wire  [7:0]DO,        // data out, write bus
     output wire WE,              // write enable
-    input wire IRQ,              // interrupt request
-    input wire NMI,              // non-maskable interrupt request
-    input wire RDY               // Ready signal. Pauses CPU when RDY=0
+    input  wire IRQ,             // interrupt request
+    input  wire NMI,             // non-maskable interrupt request
+    input  wire RDY,             // Ready signal. Pauses CPU when RDY=0
+    output wire SYNC,
+    output wire IREAD,
+    output wire MEN
 );
 
 /*
@@ -209,7 +212,7 @@ parameter
     RTI1   = 6'd38, // RTI     - read P from stack
     RTI2   = 6'd39, // RTI     - read PCL from stack
     RTI3   = 6'd40, // RTI     - read PCH from stack
-    RTI4   = 6'd41, // RTI     - read PCH from stack
+    RTI4   = 6'd41, // RTI     - fetch opcode
     RTS0   = 6'd42, // RTS     - send S to ALU (+1)
     RTS1   = 6'd43, // RTS     - read PCL from stack
     RTS2   = 6'd44, // RTS     - write PCL to ALU, read PCH
@@ -410,6 +413,47 @@ always @* begin
 end
 assign AB = ABMUX;
 
+logic IREADMUX;
+always @* begin
+    unique case( state )
+        // not istream
+        ABS1,
+        ABSX1,
+        ABSX2,
+        BRK0,
+        BRK1,
+        BRK2,
+        INDX1,
+        INDX2,
+        INDX3,
+        INDY0,
+        INDY1,
+        INDY2,
+        INDY3,
+        JSR0,
+        JSR1,
+        JSR3,
+        PULL1,
+        PUSH1,
+        READ,
+        REG,
+        RTI0,
+        RTI1,
+        RTI2,
+        RTI3,
+        RTS0,
+        RTS1,
+        RTS2,
+        RTS3,
+        WRITE,
+        ZP0,
+        ZPX1:    IREADMUX = 0;
+        
+        default: IREADMUX = 1;
+    endcase
+end
+assign IREAD = IREADMUX;
+
 /*
  * ABH/ABL pair is used for registering previous address bus state.
  * This can be used to keep the current address, freeing up the original
@@ -473,6 +517,21 @@ always @* begin
     endcase
 end
 assign WE = WEGEN;
+
+logic MENGEN;
+always @* begin
+    unique case( state )
+        RTI0,
+        RTS0,
+        RTS3,
+        JSR3,
+        REG:     MENGEN = 0;
+
+        default: MENGEN = 1;
+    endcase
+end
+assign MEN = MENGEN;
+
 
 /*
  * register file, contains A, X, Y and S (stack pointer) registers. At each
@@ -910,7 +969,7 @@ always @(posedge clk `ASYNC(posedge reset)) begin
                     8'b???0_0001:   state <= INDX0;
                     8'b???0_01??:   state <= ZP0;
                     8'b???0_1001:   state <= FETCH; // IMM
-                    8'b???0_1101:   state <= ABS0;  // even E column
+                    8'b???0_1101:   state <= ABS0;  // even D column
                     8'b???0_1110:   state <= ABS0;  // even E column
                     8'b???1_0000:   state <= BRA0;  // odd 0 column
                     8'b???1_0001:   state <= INDY0; // odd 1 column
@@ -993,6 +1052,26 @@ always @(posedge clk `ASYNC(posedge reset)) begin
         endcase
     end
 end
+
+logic SYNCMUX;
+always_comb begin
+    unique case( state )
+        FETCH   ,   
+        REG     ,
+        PUSH1   ,
+        PULL2   ,
+        RTI4    ,
+        BRA2    ,
+        JMP1    : SYNCMUX = 1;
+        
+        BRA0    : SYNCMUX = !cond_true;
+
+        BRA1    : SYNCMUX = !(CO ^ backwards);
+
+        default : SYNCMUX = 0;        
+    endcase
+end
+assign SYNC = SYNCMUX;
 
 /*
  * Additional control signals
