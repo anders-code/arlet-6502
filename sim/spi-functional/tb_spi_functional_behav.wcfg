@@ -30,31 +30,31 @@
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb_spi_functional/rdy">
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/rdy">
       <obj_property name="ElementShortName">rdy</obj_property>
       <obj_property name="ObjectShortName">rdy</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_spi_functional/cpu_inst/AB">
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/AB">
       <obj_property name="ElementShortName">AB[15:0]</obj_property>
       <obj_property name="ObjectShortName">AB[15:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_spi_functional/cpu_inst/PC">
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/PC">
       <obj_property name="ElementShortName">PC[15:0]</obj_property>
       <obj_property name="ObjectShortName">PC[15:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_spi_functional/cpu_inst/DI">
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/DI">
       <obj_property name="ElementShortName">DI[7:0]</obj_property>
       <obj_property name="ObjectShortName">DI[7:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_spi_functional/cpu_inst/DO">
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/DO">
       <obj_property name="ElementShortName">DO[7:0]</obj_property>
       <obj_property name="ObjectShortName">DO[7:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_spi_functional/cpu_inst/state">
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/state">
       <obj_property name="ElementShortName">state[5:0]</obj_property>
       <obj_property name="ObjectShortName">state[5:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/tb_spi_functional/cpu_inst/statename">
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/statename">
       <obj_property name="ElementShortName">statename[47:0]</obj_property>
       <obj_property name="ObjectShortName">statename[47:0]</obj_property>
       <obj_property name="Radix">ASCIIRADIX</obj_property>
