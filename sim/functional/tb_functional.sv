@@ -19,6 +19,10 @@ wire  [15:0]ab;
 wire   [7:0]dout;
 wire   [7:0]din;
 wire        we;
+wire        sync;
+wire        iread;
+wire        men;
+
 logic       irq = 0;
 logic       nmi = 0;
 logic       rdy = 1;
@@ -32,13 +36,53 @@ cpu_6502 cpu_inst (
   .WE    (we),
   .IRQ   (irq),
   .NMI   (nmi),
-  .RDY   (rdy)
+  .RDY   (rdy),
+  .SYNC  (sync),
+  .IREAD (iread),
+  .MEN   (men)
 );
+
+int nomencnt = 0;
+reg last_sync;
+reg [15:0]last_ab;
+always @(posedge clk) begin
+    if (rdy)
+        last_sync <= sync;
+        
+    if (rdy)
+        last_ab <= ab;
+    if (rdy && !men)
+        ++nomencnt;
+    
+    if ($time > 120) begin
+        assert(!(cpu_inst.state == cpu_inst.DECODE && !last_sync)) else 
+            $error("cpu_state1");
+    
+        assert(!(cpu_inst.state != cpu_inst.DECODE && last_sync)) else 
+            $error("cpu_state2");
+            
+        assert(!(we && !men)) else
+            $error("we no men");
+            
+        assert(!(iread && !men)) else
+            $error("iread no men");
+            
+        assert(!(iread && we)) else
+            $error("iread no men");                             
+            
+        assert(!(men && iread && ab != cpu_inst.PC_temp)) else
+            $error("oops %0b %0h %0h %s", iread, ab, cpu_inst.PC_temp, cpu_inst.statename);
+        assert(!(men && !iread && ab == cpu_inst.PC_temp)) else
+            $error("!oops %0b %0h %0h %s", iread, ab, cpu_inst.PC_temp, cpu_inst.statename);
+        end
+end
+
+//wire [15:0]ab2 = (!iread && ab == cpu_inst.PC_temp) ? last_ab : ab;
 
 reg [7:0]mem[64*1024];
 reg [7:0]memout;
 always_ff @(posedge clk) begin
-    if (rdy) begin
+    if (men && rdy) begin
         if (we)
             mem[ab] <= dout;
         memout <= mem[ab];
@@ -67,7 +111,7 @@ always @(posedge clk) begin
         // http://forum.6502.org/viewtopic.php?f=8&t=6202#p90723
         // 10 cycles of reset + 6 cycles before executing 0400 
         if (termcnt == 0)
-            $display("\nSuccess! cycles %0d (ideal 96241364)\n", $time/10 - 16);
+            $display("\nSuccess! cycles %0d (ideal 96241364) %0d\n", $time/10 - 16, nomencnt);
         else if (termcnt >= 2)
             $finish(2);
 
