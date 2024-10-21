@@ -21,6 +21,8 @@ module spi_sram_master #(
     input  wire [23:0]mem_addr,
     input  wire       mem_en,
     input  wire       mem_wr,
+    input  wire       mem_rburst,
+    input  wire       mem_wburst,
     input  wire  [7:0]mem_wdata,
 
     output wire       mem_rdy,
@@ -36,6 +38,9 @@ typedef enum integer {
     CMDADDR2,
     DATA1,
     DATA2,
+    DATA3,
+    DATA_WBURST,
+    DATA_RBURST,
     DELAY1,
     DELAY2,
     DELAY3
@@ -87,7 +92,7 @@ always_comb begin
                 if (mem_wr)
                     data_load_val = { 8'h82, mem_addr, mem_wdata };
                 else
-                    data_load_val = { 8'h83, mem_addr, mem_wdata };
+                    data_load_val = { 8'h83, mem_addr, 8'h81 }; // TODO: cmd rdata
 
                 next_state = CMDADDR1;
             end
@@ -102,7 +107,7 @@ always_comb begin
 
         CMDADDR2: begin
             counter_reset = 1;
-            counter_reset_val = (7-2);
+            counter_reset_val = (6-2);
 
             data_shift = 1;
 
@@ -117,13 +122,48 @@ always_comb begin
         end
 
         DATA2: begin
+            data_shift = 1;
+
+            if (mem_en && mem_wburst)
+                next_state = DATA_WBURST;
+            else
+                next_state = DATA3;
+        end
+
+        DATA3: begin
             counter_reset = 1;
             counter_reset_val = (3-2);
 
             data_shift = 1;
             rdata_load = 1;
 
-            next_state = DELAY1;
+            if (mem_en && mem_rburst)
+                next_state = DATA_RBURST;
+            else
+                next_state = DELAY1;
+        end
+
+        DATA_WBURST: begin
+            ready_sm = 1;
+
+            counter_reset = 1;
+            counter_reset_val = (6-2);
+
+            data_load = 1;
+            data_load_val = { mem_wdata, mem_addr, 8'h81 };
+
+            next_state = DATA1;
+        end
+
+        DATA_RBURST: begin
+            ready_sm = 1;
+
+            counter_reset = 1;
+            counter_reset_val = (5-2);
+
+            data_shift = 1;
+
+            next_state = DATA1;
         end
 
         DELAY1: begin
@@ -136,7 +176,7 @@ always_comb begin
                 if (mem_wr)
                     data_load_val = { 8'h82, mem_addr, mem_wdata };
                 else
-                    data_load_val = { 8'h83, mem_addr, mem_wdata };
+                    data_load_val = { 8'h83, mem_addr, 8'h81 }; // TODO: cmd rdata
 
                 if (counter_done)
                     next_state = DELAY3;
