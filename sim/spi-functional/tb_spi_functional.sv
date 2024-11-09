@@ -66,6 +66,10 @@ reg [7:0]lasttc = 0;
 time lasttm = 100;
 time lasttm2 = 0;
 int termcnt = 0;
+
+reg [15:0]capAB;
+reg  [7:0]capDI;
+
 always @(posedge clk) begin
     if (tc != lasttc) begin
         $display("test %2d, time %0d (%0d)", tc, $time/10, ($time-lasttm)/10);
@@ -78,7 +82,7 @@ always @(posedge clk) begin
     end
 
     // Arlet's core runs PC one cycle early so PC is 3469+1 when executing 3469
-    if (spi_cpu_inst.rdy && spi_cpu_inst.cpu_inst.PC == 'h3469+1) begin
+    if (spi_cpu_inst.cpu_rdy && spi_cpu_inst.cpu_inst.PC == 'h3469+1) begin
         // http://forum.6502.org/viewtopic.php?f=8&t=6202#p90723
         // 10 cycles of reset + 6 cycles before executing 0400
         // first cycle where PC == 400+1 and state == DECODE and RDY is 2710:
@@ -92,6 +96,17 @@ always @(posedge clk) begin
 
         termcnt <= termcnt + 1;
     end
+    
+//    if (spi_cpu_inst.cpu_rdy)
+//        assert(spi_cpu_inst.cache_inst.mem_rdata == spi_cpu_inst.cache_inst.rdata) else
+//            $display("oops");
+
+    if (spi_cpu_inst.cpu_rdy) begin
+        capAB <= spi_cpu_inst.cpu_inst.AB;
+        capDI <= spi_cpu_inst.cpu_inst.DI;
+    end
+//    if (capAB == 'h0500 && capDI == 'hd8)
+//        $finish(2);
 end
 
 initial begin
@@ -99,11 +114,32 @@ initial begin
     mem['hfffc] = 8'h00;
     mem['hfffd] = 8'h04;
 
+//    for (int i=0; i<16; ++i)
+//        spi_cpu_inst.cache_inst.cache_line_inst0.block[i] = mem[16'h0400+i];
+        
+//    spi_cpu_inst.cache_inst.cache_line_inst0.btag = 12'h040;
+//    spi_cpu_inst.cache_inst.cache_line_inst0.bvalid = 1;
+    
     spi_cpu_inst.cpu_inst.AXYS[1] = 8'hff;
     spi_cpu_inst.cpu_inst.PC = 16'h1234;
-
+    
     if(tb_enable_dumpfile("tb_spi_functional.vcd"))
         $dumpvars(0, tb_spi_functional);
+
+//#1391;
+//    spi_cpu_inst.cache_inst.rdata = 8'bxx;
+
+//    #492 spi_cpu_inst.spi_sram_master_inst.rdata_load = 1;
+//    #(932-492) spi_cpu_inst.spi_sram_master_inst.rdata_load = 1;
+//    #(6212-932) spi_cpu_inst.spi_sram_master_inst.rdata_load = 1;
+//    $monitor("%s %0x %0x", spi_cpu_inst.cpu_inst.statename, spi_cpu_inst.cpu_inst.AB, spi_cpu_inst.cpu_inst.DI);
+//    $monitor("%s %0x %0x", spi_cpu_inst.cpu_inst.statename, capAB, capDI);
+
+            
+    //#13000 spi_cpu_inst.cache_inst.cache_line_inst0.flargmarg = 0;
+    
+//    #5142000;
+//    #0;
 end
 
 endmodule

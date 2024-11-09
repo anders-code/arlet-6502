@@ -13,15 +13,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="12,910.001 ns"></ZoomEndTime>
-      <Cursor1Time time="8,871.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="41.000001 us"></ZoomEndTime>
+      <Cursor1Time time="41.000000 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="205"></NameColumnWidth>
-      <ValueColumnWidth column_width="158"></ValueColumnWidth>
+      <ValueColumnWidth column_width="150"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="12" />
+   <WVObjectSize size="57" />
    <wvobject type="logic" fp_name="/tb_spi_functional/clkrst_inst/clki">
       <obj_property name="ElementShortName">clki</obj_property>
       <obj_property name="ObjectShortName">clki</obj_property>
@@ -30,9 +30,9 @@
       <obj_property name="ElementShortName">rst</obj_property>
       <obj_property name="ObjectShortName">rst</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/rdy">
-      <obj_property name="ElementShortName">rdy</obj_property>
-      <obj_property name="ObjectShortName">rdy</obj_property>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/RDY">
+      <obj_property name="ElementShortName">RDY</obj_property>
+      <obj_property name="ObjectShortName">RDY</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/AB">
       <obj_property name="ElementShortName">AB[15:0]</obj_property>
@@ -49,6 +49,22 @@
    <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/DO">
       <obj_property name="ElementShortName">DO[7:0]</obj_property>
       <obj_property name="ObjectShortName">DO[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/MEN">
+      <obj_property name="ElementShortName">MEN</obj_property>
+      <obj_property name="ObjectShortName">MEN</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/WE">
+      <obj_property name="ElementShortName">WE</obj_property>
+      <obj_property name="ObjectShortName">WE</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/IREAD">
+      <obj_property name="ElementShortName">IREAD</obj_property>
+      <obj_property name="ObjectShortName">IREAD</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/SYNC">
+      <obj_property name="ElementShortName">SYNC</obj_property>
+      <obj_property name="ObjectShortName">SYNC</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cpu_inst/state">
       <obj_property name="ElementShortName">state[5:0]</obj_property>
@@ -70,5 +86,167 @@
    <wvobject type="logic" fp_name="/tb_spi_functional/miso">
       <obj_property name="ElementShortName">miso</obj_property>
       <obj_property name="ObjectShortName">miso</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/state">
+      <obj_property name="ElementShortName">state[31:0]</obj_property>
+      <obj_property name="ObjectShortName">state[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider89" type="divider">
+      <obj_property name="label">New Divider 3</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/mem_addr">
+      <obj_property name="ElementShortName">mem_addr[23:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_addr[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/mem_en">
+      <obj_property name="ElementShortName">mem_en</obj_property>
+      <obj_property name="ObjectShortName">mem_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/mem_wr">
+      <obj_property name="ElementShortName">mem_wr</obj_property>
+      <obj_property name="ObjectShortName">mem_wr</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/mem_wdata">
+      <obj_property name="ElementShortName">mem_wdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_wdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/mem_rdata">
+      <obj_property name="ElementShortName">mem_rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider89" type="divider">
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/mem_addr">
+      <obj_property name="ElementShortName">mem_addr[23:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_addr[23:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/mem_en">
+      <obj_property name="ElementShortName">mem_en</obj_property>
+      <obj_property name="ObjectShortName">mem_en</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/mem_rdy">
+      <obj_property name="ElementShortName">mem_rdy</obj_property>
+      <obj_property name="ObjectShortName">mem_rdy</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/mem_wr">
+      <obj_property name="ElementShortName">mem_wr</obj_property>
+      <obj_property name="ObjectShortName">mem_wr</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/mem_wdata">
+      <obj_property name="ElementShortName">mem_wdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_wdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/mem_rdata">
+      <obj_property name="ElementShortName">mem_rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/mem_rdata0">
+      <obj_property name="ElementShortName">mem_rdata0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem_rdata0[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/mem_rdata_load">
+      <obj_property name="ElementShortName">mem_rdata_load</obj_property>
+      <obj_property name="ObjectShortName">mem_rdata_load</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/spi_sram_master_inst/state">
+      <obj_property name="ElementShortName">state[31:0]</obj_property>
+      <obj_property name="ObjectShortName">state[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider89" type="divider">
+      <obj_property name="label">New Divider</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_hit">
+      <obj_property name="ElementShortName">cache_hit</obj_property>
+      <obj_property name="ObjectShortName">cache_hit</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/state">
+      <obj_property name="ElementShortName">state[31:0]</obj_property>
+      <obj_property name="ObjectShortName">state[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/fill_off">
+      <obj_property name="ElementShortName">fill_off[2:0]</obj_property>
+      <obj_property name="ObjectShortName">fill_off[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/fill_done">
+      <obj_property name="ElementShortName">fill_done</obj_property>
+      <obj_property name="ObjectShortName">fill_done</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_rdata">
+      <obj_property name="ElementShortName">cache_rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cache_rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider89" type="divider">
+      <obj_property name="label">New Divider</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst0/fill_en">
+      <obj_property name="ElementShortName">fill_en</obj_property>
+      <obj_property name="ObjectShortName">fill_en</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst0/fill_data">
+      <obj_property name="ElementShortName">fill_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">fill_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst0/block">
+      <obj_property name="ElementShortName">block[0:7][7:0]</obj_property>
+      <obj_property name="ObjectShortName">block[0:7][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/last_addr">
+      <obj_property name="ElementShortName">last_addr[2:0]</obj_property>
+      <obj_property name="ObjectShortName">last_addr[2:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/rdata">
+      <obj_property name="ElementShortName">rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst0/block_tag">
+      <obj_property name="ElementShortName">block_tag[12:0]</obj_property>
+      <obj_property name="ObjectShortName">block_tag[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_hit">
+      <obj_property name="ElementShortName">cache_line_hit[1:0]</obj_property>
+      <obj_property name="ObjectShortName">cache_line_hit[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/fill_line_en">
+      <obj_property name="ElementShortName">fill_line_en[1:0]</obj_property>
+      <obj_property name="ObjectShortName">fill_line_en[1:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst0/valid">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst0/block_tag">
+      <obj_property name="ElementShortName">block_tag[12:0]</obj_property>
+      <obj_property name="ObjectShortName">block_tag[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst0/block">
+      <obj_property name="ElementShortName">block[0:7][7:0]</obj_property>
+      <obj_property name="ObjectShortName">block[0:7][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst0/cache_rdata">
+      <obj_property name="ElementShortName">cache_rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cache_rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst1/valid">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst1/block_tag">
+      <obj_property name="ElementShortName">block_tag[12:0]</obj_property>
+      <obj_property name="ObjectShortName">block_tag[12:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst1/block">
+      <obj_property name="ElementShortName">block[0:7][7:0]</obj_property>
+      <obj_property name="ObjectShortName">block[0:7][7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_inst1/cache_rdata">
+      <obj_property name="ElementShortName">cache_rdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">cache_rdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/tb_spi_functional/spi_cpu_inst/cache_inst/cache_line_rdata">
+      <obj_property name="ElementShortName">cache_line_rdata[0:1][7:0]</obj_property>
+      <obj_property name="ObjectShortName">cache_line_rdata[0:1][7:0]</obj_property>
    </wvobject>
 </wave_config>
