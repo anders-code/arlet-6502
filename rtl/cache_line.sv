@@ -6,7 +6,7 @@
 `include "async_reset.vh"
 
 module cache_line #(
-    parameter TAG_WIDTH     = 12,
+    parameter TAG_WIDTH     = 13,
     parameter BLOCK_SIZE    = 8,
     localparam OFFSET_WIDTH = $clog2(BLOCK_SIZE),
     localparam TMSB = TAG_WIDTH-1,

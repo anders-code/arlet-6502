@@ -37,7 +37,8 @@ typedef enum integer {
 
 State_Type  state;
 
-reg    [3:0]saved_addr;
+reg    [2:0]saved_addr;
+reg    [2:0]fill_off;
 
 wire        fill_done;
 
@@ -88,7 +89,7 @@ always_comb begin
                 next_state  = READY; // complete cycle
             end
             else if (cpu_iread) begin
-                mem_addr_sm = { 8'b0, cpu_addr[15:4], 4'b0 };
+                mem_addr_sm = { 8'b0, cpu_addr[15:3], 3'b0 };
 
                 fill_reset  = 0;
                 fill_tag_en = 1;
@@ -145,9 +146,8 @@ always_ff @(posedge clk) begin
 end
 
 // count bytes during fill
-wire [3:0]fill_off_next;
+wire [2:0]fill_off_next;
 
-reg [3:0]fill_off;
 always_ff @(posedge clk) begin
     if (fill_reset)
         fill_off <= 0;
@@ -160,7 +160,7 @@ assign { fill_done, fill_off_next } = fill_off + 1;
 // saved request addr
 always_ff @(posedge clk) begin
     if (fill_tag_en)
-        saved_addr <= cpu_addr[3:0];
+        saved_addr <= cpu_addr[2:0];
 end
 
 // icache lines
@@ -170,15 +170,15 @@ wire [7:0]cache_line_rdata[2];
 reg [1:0]fill_line_en;
 
 cache_line #(
-    .TAG_WIDTH  (12),
-    .BLOCK_SIZE (16)
+    .TAG_WIDTH  (13),
+    .BLOCK_SIZE (8)
 ) icache_line_inst_0 (
     .clk,
     .rst,
     .wr           (cpu_wr),
     .fill_line_en (fill_line_en[0]),
-    .tag          (cpu_addr[15:4]),
-    .off          (cpu_addr[3:0]),
+    .tag          (cpu_addr[15:3]),
+    .off          (cpu_addr[2:0]),
     .fill_tag_en  (fill_tag_en),
     .fill_en      (fill_en),
     .fill_off,
@@ -188,15 +188,15 @@ cache_line #(
 );
 
 cache_line #(
-    .TAG_WIDTH  (12),
-    .BLOCK_SIZE (16)
+    .TAG_WIDTH  (13),
+    .BLOCK_SIZE (8)
 ) icache_line_inst_1 (
     .clk,
     .rst,
     .wr           (cpu_wr),
     .fill_line_en (fill_line_en[1]),
-    .tag          (cpu_addr[15:4]),
-    .off          (cpu_addr[3:0]),
+    .tag          (cpu_addr[15:3]),
+    .off          (cpu_addr[2:0]),
     .fill_tag_en  (fill_tag_en),
     .fill_en      (fill_en),
     .fill_off,
