@@ -6,12 +6,20 @@
 
 module spi_cpu_6502 (
     input  wire clk,
-    input  wire rst,
+    input  wire arst_n,
     input  wire nmi,
     input  wire irq,
     output wire cs_n,
     output wire mosi,
     input  wire miso
+);
+
+wire rst;
+
+reset_sync reset_sync_inst (
+    .clk,
+    .arst_n,
+    .rst
 );
 
 wire [15:0]cpu_addr;

@@ -22,7 +22,7 @@ wire miso;
 
 spi_cpu_6502 spi_cpu_inst (
     .clk,
-    .rst,
+    .arst_n (~rst),
     .nmi (1'b0),
     .irq (1'b0),
     .cs_n,
@@ -84,13 +84,13 @@ always @(posedge clk) begin
     // Arlet's core runs PC one cycle early so PC is 3469+1 when executing 3469
     if (spi_cpu_inst.cpu_rdy && spi_cpu_inst.cpu_inst.PC == 'h3469+1) begin
         // http://forum.6502.org/viewtopic.php?f=8&t=6202#p90723
-        // 10 cycles of reset + 6 cycles before executing 0400
+        // 10+2 cycles of reset + 6 cycles before executing 0400
         // first cycle where PC == 400+1 and state == DECODE and RDY is 2710:
         //   1st cycle is 41 clks, rest are 44
-        //   10 + 41 + 5*44 == 271
+        //   12 + 41 + 5*44 == 273
         if (termcnt == 0)
             $display("\nSuccess! clocks %0d cycles %0d (ideal 96241364)\n",
-                $time/10 - 271, ($time/10 - 271)/44);
+                $time/10 - 273, ($time/10 - 273)/44);
         else if (termcnt >= 2)
             $finish(2);
 
