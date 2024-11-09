@@ -1,5 +1,7 @@
 `verilator_config
 
+lint_off -rule PINCONNECTEMPTY -file "*spi_cpu_6502.sv"
+
 lint_off -rule UNUSEDSIGNAL -file "*cpu_6502.sv" -match "*'A'"
 lint_off -rule UNUSEDSIGNAL -file "*cpu_6502.sv" -match "*'X'"
 lint_off -rule UNUSEDSIGNAL -file "*cpu_6502.sv" -match "*'Y'"

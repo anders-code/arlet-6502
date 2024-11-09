@@ -15,47 +15,19 @@ tb_clkrst clkrst_inst (.clk, .rst);
 
 import tb_utils::*;
 
-logic [15:0]ab;
-logic  [7:0]dout;
-logic  [7:0]din;
-logic       we;
-logic       irq = 0;
-logic       nmi = 0;
-wire        rdy;
-
-cpu_6502 cpu_inst (
-  .clk,
-  .reset (rst),
-  .AB    (ab),
-  .DI    (din),
-  .DO    (dout),
-  .WE    (we),
-  .IRQ   (irq),
-  .NMI   (nmi),
-  .RDY   (rdy)
-);
 
 wire cs_n;
 wire mosi;
 wire miso;
 
-spi_sram_master spi_sram_master_inst (
+spi_cpu_6502 spi_cpu_inst (
     .clk,
-    .clkb (~clk),
     .rst,
-    .en    (1'b1),
-    .enb   (1'b1),
+    .nmi (1'b0),
+    .irq (1'b0),
     .cs_n,
-    .miso,
     .mosi,
-    .mem_addr  ({ 8'b0, ab }),
-    .mem_en    (1'b1),
-    .mem_wr    (we),
-    .mem_wdata (dout),
-    .mem_rdy   (rdy),
-    .mem_rdata (din),
-    .mem_rdata0 (),
-    .mem_rdata_load ()
+    .miso
 );
 
 wire [23:0]mem_addr;
@@ -106,7 +78,7 @@ always @(posedge clk) begin
     end
 
     // Arlet's core runs PC one cycle early so PC is 3469+1 when executing 3469
-    if (rdy && cpu_inst.PC == 'h3469+1) begin
+    if (spi_cpu_inst.rdy && spi_cpu_inst.cpu_inst.PC == 'h3469+1) begin
         // http://forum.6502.org/viewtopic.php?f=8&t=6202#p90723
         // 10 cycles of reset + 6 cycles before executing 0400
         // first cycle where PC == 400+1 and state == DECODE and RDY is 2710:
@@ -126,6 +98,9 @@ initial begin
     $readmemh(tb_rel_path("../mem-files/6502_functional_test.mem"), mem, 0, $size(mem)-1);
     mem['hfffc] = 8'h00;
     mem['hfffd] = 8'h04;
+
+    spi_cpu_inst.cpu_inst.AXYS[1] = 8'hff;
+    spi_cpu_inst.cpu_inst.PC = 16'h1234;
 
     if(tb_enable_dumpfile("tb_spi_functional.vcd"))
         $dumpvars(0, tb_spi_functional);
