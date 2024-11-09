@@ -9,6 +9,9 @@ module cache_6502 (
     input  wire clk,
     input  wire rst,
 
+    input  wire icache_en,
+    input  wire skip_int,
+
     input  wire [15:0]cpu_addr,
     input  wire       cpu_en,
     input  wire       cpu_wr,
@@ -16,6 +19,9 @@ module cache_6502 (
     input  wire  [7:0]cpu_wdata,
     output wire       cpu_rdy,
     output wire  [7:0]cpu_rdata,
+
+    input  wire       int_en,
+    input  wire  [7:0]int_rdata,
 
     output wire [23:0]mem_addr,
     output wire       mem_en,
@@ -82,13 +88,18 @@ always_comb begin
 
             rdata_next = cache_rdata;
 
-            if (!cpu_en)
+            if (!cpu_en && skip_int)
                 next_state  = READY; // skip cycle (typically REG)
-            else if (cache_hit && !cpu_wr) begin
+            else if (int_en) begin
+                rdata_next  = int_rdata;
+                rdata_load  = 1; // latch internal mem rdata
+                next_state  = READY; // complete cycle
+            end
+            else if (icache_en && cache_hit && !cpu_wr) begin
                 rdata_load  = 1; // latch cached entry
                 next_state  = READY; // complete cycle
             end
-            else if (cpu_iread) begin
+            else if (icache_en && cpu_iread) begin
                 mem_addr_sm = { 8'b0, cpu_addr[15:3], 3'b0 };
 
                 fill_reset  = 0;
@@ -174,7 +185,7 @@ cache_line #(
     .BLOCK_SIZE (8)
 ) icache_line_inst_0 (
     .clk,
-    .rst,
+    .rst          (rst || !icache_en),
     .wr           (cpu_wr),
     .fill_line_en (fill_line_en[0]),
     .tag          (cpu_addr[15:3]),
@@ -192,7 +203,7 @@ cache_line #(
     .BLOCK_SIZE (8)
 ) icache_line_inst_1 (
     .clk,
-    .rst,
+    .rst          (rst || !icache_en),
     .wr           (cpu_wr),
     .fill_line_en (fill_line_en[1]),
     .tag          (cpu_addr[15:3]),
@@ -214,6 +225,8 @@ assign cache_hit   = |cache_line_hit;
 // track plru
 always_ff @(posedge clk `ASYNC(posedge rst)) begin
     if (rst)
+        fill_line_en <= 2'b01;
+    else if (!icache_en)
         fill_line_en <= 2'b01;
     else if (cpu_rdy_sm && cpu_en && !cpu_wr) begin
         unique case(cache_line_hit)

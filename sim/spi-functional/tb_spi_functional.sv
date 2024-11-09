@@ -20,14 +20,25 @@ wire cs_n;
 wire mosi;
 wire miso;
 
+logic [7:0]gpin = 8'b0000_0000;
+wire  [7:0]gpout;
+logic [3:0]gpio_in = 4'b0;
+wire  [3:0]gpio_oe;
+wire  [3:0]gpio_out;
+
 spi_cpu_6502 spi_cpu_inst (
     .clk,
     .arst_n (~rst),
-    .nmi (1'b0),
-    .irq (1'b0),
+    .nmi    (1'b0),
+    .irq    (1'b0),
     .cs_n,
     .mosi,
-    .miso
+    .miso,
+    .gpin,
+    .gpout,
+    .gpio_in,
+    .gpio_oe,
+    .gpio_out
 );
 
 wire [23:0]mem_addr;

@@ -14,6 +14,10 @@ module spi_sram_master #(
     input  wire en,
     input  wire enb,
 
+    input  wire spi_phase, // 0: falling  1: next rising
+    input  wire spi_delay, // 0: no-delay 1: extra clock delay
+    input  wire spi_fast,  // 0: 03, none 1: 0b, one-byte turnaround
+
     output wire cs_n,
     input  wire miso,
     output wire mosi,

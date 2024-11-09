@@ -11,7 +11,13 @@ module spi_cpu_6502 (
     input  wire irq,
     output wire cs_n,
     output wire mosi,
-    input  wire miso
+    input  wire miso,
+
+    input  wire  [7:0]gpin,
+    output wire  [7:0]gpout,
+    input  wire  [3:0]gpio_in,
+    output wire  [3:0]gpio_oe,
+    output wire  [3:0]gpio_out
 );
 
 wire rst;
@@ -45,6 +51,42 @@ cpu_6502 cpu_inst (
     .MEN   (cpu_en)
 );
 
+wire       int_en;
+wire  [7:0]int_rdata;
+wire       icache_en;
+wire       skip_int;
+wire       spi_phase;
+wire       spi_delay;
+wire       spi_fast;
+wire  [7:0]upad;
+wire  [7:0]upai;
+wire  [7:0]upazo;
+
+regs_6502 regs_6502_inst (
+    .clk,
+    .rst,
+    .cpu_addr,
+    .cpu_en,
+    .cpu_wr,
+    .cpu_wdata,
+    .cpu_rdy,
+    .int_en,
+    .int_rdata,
+    .icache_en,
+    .skip_int,
+    .spi_phase,
+    .spi_delay,
+    .spi_fast,
+    .upad,
+    .upai,
+    .upazo,
+    .gpin,
+    .gpout,
+    .gpio_in,
+    .gpio_oe,
+    .gpio_out
+);
+
 wire [23:0]mem_addr;
 wire       mem_en;
 wire       mem_rdy;
@@ -59,6 +101,8 @@ wire       mem_rdata_load;
 cache_6502 cache_inst (
     .clk,
     .rst,
+    .icache_en,
+    .skip_int,
     .cpu_addr,
     .cpu_en,
     .cpu_wr,
@@ -66,6 +110,8 @@ cache_6502 cache_inst (
     .cpu_wdata,
     .cpu_rdy,
     .cpu_rdata,
+    .int_en,
+    .int_rdata,
     .mem_addr,
     .mem_en,
     .mem_wr,
@@ -84,6 +130,9 @@ spi_sram_master spi_sram_master_inst (
     .rst,
     .en    (1'b1),
     .enb   (1'b1),
+    .spi_phase,
+    .spi_delay,
+    .spi_fast,
     .cs_n,
     .miso,
     .mosi,
