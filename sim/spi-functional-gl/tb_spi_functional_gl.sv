@@ -104,7 +104,7 @@ always @(posedge clk) begin
     end
 
     // Arlet's core runs PC one cycle early so PC is 3469+1 when executing 3469
-    if (tt_6502_inst.\spi_cpu_inst.cpu_inst.RDY && PC == 'h3469+1) begin
+    if (tt_6502_inst.\spi_cpu_inst.cache_inst.cpu_rdy && PC == 'h3469+1) begin
         // http://forum.6502.org/viewtopic.php?f=8&t=6202#p90723
         // 10 cycles of reset + 6 cycles before executing 0400 
         // first cycle where PC == 400+1 and state == DECODE and RDY is 2710:
