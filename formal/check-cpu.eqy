@@ -18,6 +18,9 @@ memory -nomap
 [gate]
 read_verilog -sv -formal gate/cpu_6502.sv gate/alu_6502.sv
 hierarchy -check -top cpu_6502
+delete cpu_6502/SYNC
+delete cpu_6502/IREAD
+delete cpu_6502/MEN
 proc
 memory -nomap
 #prep -top cpu_6502
