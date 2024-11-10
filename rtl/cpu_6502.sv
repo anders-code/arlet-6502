@@ -53,12 +53,12 @@ reg  IRHOLD_valid;      // Valid instruction in IRHOLD
 
 reg  [7:0] AXYS[3:0];   // A, X, Y and S register file
 
-reg  C = 0;             // carry flag (init at zero to avoid X's in ALU sim)
-reg  Z = 0;             // zero flag
-reg  I = 0;             // interrupt flag
-reg  D = 0;             // decimal flag
-reg  V = 0;             // overflow flag
-reg  N = 0;             // negative flag
+reg  C;                 // carry flag (init at zero to avoid X's in ALU sim)
+reg  Z;                 // zero flag
+reg  I;                 // interrupt flag
+reg  D;                 // decimal flag
+reg  V;                 // overflow flag
+reg  N;                 // negative flag
 wire AZ;                // ALU Zero flag
 wire AV;                // ALU overflow flag
 wire AN;                // ALU negative flag
@@ -814,8 +814,10 @@ end
 /*
  * Update C flag when doing ADC/SBC, shift/rotate, compare
  */
-always @(posedge clk ) begin
-    if( RDY ) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
+    if (reset)
+        C <= 0;
+    else if( RDY ) begin
         if( shift && state == WRITE )
             C <= CO;
         else if( state == RTI2 )
@@ -836,8 +838,10 @@ end
 /*
  * Update Z, N flags when writing A, X, Y, Memory, or when doing compare
  */
-always @(posedge clk) begin
-    if( RDY ) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
+    if (reset)
+        Z <= 0;
+    else if( RDY ) begin
         if( state == WRITE )
             Z <= AZ;
         else if( state == RTI2 )
@@ -851,8 +855,10 @@ always @(posedge clk) begin
     end
 end
 
-always @(posedge clk) begin
-    if( RDY ) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
+    if (reset)
+        N <= 0;
+    else if( RDY ) begin
         if( state == WRITE )
             N <= AN;
         else if( state == RTI2 )
@@ -871,8 +877,10 @@ end
 /*
  * Update I flag
  */
-always @(posedge clk) begin
-    if( RDY ) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
+    if (reset)
+        I <= 0;
+    else if( RDY ) begin
         if( state == BRK3 )
             I <= 1;
         else if( state == RTI2 )
@@ -890,8 +898,10 @@ end
 /*
  * Update D flag
  */
-always @(posedge clk )begin
-    if( RDY ) begin
+always @(posedge clk `ASYNC(posedge reset))begin
+    if (reset)
+        D <= 0;
+    else if( RDY ) begin
         if( state == RTI2 )
             D <= DI[3];
         else if( state == DECODE ) begin
@@ -905,8 +915,10 @@ end
 /*
  * Update V flag
  */
-always @(posedge clk ) begin
-    if( RDY ) begin
+always @(posedge clk `ASYNC(posedge reset)) begin
+    if (reset)
+        V <= 0;
+    else if( RDY ) begin
         if( state == RTI2 )
             V <= DI[6];
         else if( state == DECODE ) begin
