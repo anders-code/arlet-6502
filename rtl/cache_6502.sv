@@ -55,8 +55,6 @@ wire        fill_done;
 wire   [7:0]cache_rdata;
 wire        cache_hit;
 
-logic  [7:0]upa;
-
 State_Type  next_state;
 
 logic       fill_reset;
@@ -65,7 +63,7 @@ logic       fill_en;
 
 logic       cpu_rdy_sm;
 
-logic [23:0]mem_addr_sm;
+logic [15:0]mem_addr_sm;
 logic       mem_en_sm;
 logic       mem_rburst_sm;
 
@@ -79,34 +77,34 @@ always_comb begin
     fill_tag_en = 0;
     fill_reset  = 1;
 
-    cpu_rdy_sm  = 0;
+    mem_addr_sm = cpu_addr;
 
-    mem_addr_sm   = { upa, cpu_addr };
-    mem_en_sm     = 0;
-    mem_rburst_sm = 0;
-
-    rdata_next   = mem_rdata0;
-    rdata_load   = mem_rdata_load;
+    rdata_next  = mem_rdata0;
+    rdata_load  = 0;
 
     unique case(state)
         READY: begin
             cpu_rdy_sm = 1;
+            mem_rburst_sm = 0;
 
-            rdata_next = cache_rdata;
-
-            if (!cpu_en && skip_int)
+            if (!cpu_en && skip_int) begin
+                mem_en_sm   = 0; // no memory access
                 next_state  = READY; // skip cycle (typically REG)
+            end
             else if (int_en) begin
                 rdata_next  = int_rdata;
                 rdata_load  = 1; // latch internal mem rdata
+                mem_en_sm   = 0; // no memory access
                 next_state  = READY; // complete cycle
             end
             else if (icache_en && cache_hit && !cpu_wr) begin
+                rdata_next  = cache_rdata;
                 rdata_load  = 1; // latch cached entry
+                mem_en_sm   = 0; // no memory access
                 next_state  = READY; // complete cycle
             end
             else if (icache_en && cpu_iread) begin
-                mem_addr_sm = { upa, cpu_addr[15:3], 3'b0 };
+                mem_addr_sm = { cpu_addr[15:3], 3'b0 };
 
                 fill_reset  = 0;
                 fill_tag_en = 1;
@@ -121,16 +119,21 @@ always_comb begin
         end
 
         MEM_WAIT: begin
-            mem_en_sm  = 1;
+            cpu_rdy_sm    = 0;
 
-            rdata_next = mem_rdata0;
-            rdata_load = mem_rdata_load;
+            mem_en_sm     = 1;
+            mem_rburst_sm = 0;
+
+            rdata_next    = mem_rdata0;
+            rdata_load    = mem_rdata_load;
 
             if (mem_rdata_load)
                 next_state = READY;
         end
 
         IFILL: begin
+            cpu_rdy_sm    = 0;
+
             mem_en_sm     = !fill_done;
             mem_rburst_sm = !fill_done;
 
@@ -181,6 +184,7 @@ always_ff @(posedge clk) begin
 end
 
 // upper address byte (instruction, zero/stack, or data)
+logic [7:0]upa = 0;
 always_comb begin
     if (cpu_iread)
         upa = upai;
@@ -262,7 +266,7 @@ assign mem_wburst = 0;
 assign mem_wdata  = cpu_wdata;
 
 // mux from cpu or cache-control
-assign mem_addr   = mem_addr_sm;
+assign mem_addr   = { upa, mem_addr_sm };
 assign mem_en     = mem_en_sm;
 assign mem_rburst = mem_rburst_sm;
 
