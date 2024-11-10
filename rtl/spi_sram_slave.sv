@@ -46,7 +46,11 @@ typedef enum integer {
     DELAY
 } State_Type;
 
-localparam State_Type DONE_OR_IDLE = CS_DELAY > 0 ? DONE : IDLE;
+`ifndef __ICARUS__
+    localparam State_Type DONE_OR_IDLE = CS_DELAY > 0 ? DONE : IDLE;
+`else
+    localparam DONE_OR_IDLE = CS_DELAY > 0 ? DONE : IDLE;
+`endif
 
 State_Type state = IDLE;
 
