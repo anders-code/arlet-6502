@@ -23,6 +23,10 @@ module cache_6502 (
     input  wire       int_en,
     input  wire  [7:0]int_rdata,
 
+    input  wire  [7:0]upad,
+    input  wire  [7:0]upai,
+    input  wire  [7:0]upazo,
+
     output wire [23:0]mem_addr,
     output wire       mem_en,
     output wire       mem_wr,
@@ -51,6 +55,8 @@ wire        fill_done;
 wire   [7:0]cache_rdata;
 wire        cache_hit;
 
+logic  [7:0]upa;
+
 State_Type  next_state;
 
 logic       fill_reset;
@@ -75,7 +81,7 @@ always_comb begin
 
     cpu_rdy_sm  = 0;
 
-    mem_addr_sm   = { 8'b0, cpu_addr };
+    mem_addr_sm   = { upa, cpu_addr };
     mem_en_sm     = 0;
     mem_rburst_sm = 0;
 
@@ -100,7 +106,7 @@ always_comb begin
                 next_state  = READY; // complete cycle
             end
             else if (icache_en && cpu_iread) begin
-                mem_addr_sm = { 8'b0, cpu_addr[15:3], 3'b0 };
+                mem_addr_sm = { upa, cpu_addr[15:3], 3'b0 };
 
                 fill_reset  = 0;
                 fill_tag_en = 1;
@@ -172,6 +178,16 @@ assign { fill_done, fill_off_next } = fill_off + 1;
 always_ff @(posedge clk) begin
     if (fill_tag_en)
         saved_addr <= cpu_addr[2:0];
+end
+
+// upper address byte (instruction, zero/stack, or data)
+always_comb begin
+    if (cpu_iread)
+        upa = upai;
+    else if ({ cpu_addr[15:9], 1'b0 } == 8'b0)
+        upa = upazo;
+    else
+        upa = upad;
 end
 
 // icache lines
