@@ -59,7 +59,7 @@ logic ready_sm;
 logic cs_n_sm;
 
 logic counter_reset;
-logic [4:0]counter_reset_val;
+logic [5:0]counter_reset_val;
 
 logic data_shift;
 logic data_load;
@@ -67,7 +67,13 @@ logic rdata_load;
 logic [39:0]data_load_val;
 
 reg counter_done;
+reg cur_wr;
+reg rd_delay;
+reg rd_delay2;
 
+localparam WRITE_CMD     = 8'h02;
+localparam READ_CMD      = 8'h03;
+localparam FAST_READ_CMD = 8'h0b;
 
 always_comb begin
     next_state = state;
@@ -95,9 +101,13 @@ always_comb begin
                 data_load = 1;
 
                 if (mem_wr)
-                    data_load_val = { 8'h82, mem_addr, mem_wdata };
-                else
-                    data_load_val = { 8'h83, mem_addr, 8'h81 }; // TODO: cmd rdata
+                    data_load_val = { WRITE_CMD, mem_addr, mem_wdata };
+                else if (!spi_fast)
+                    data_load_val = { READ_CMD,  mem_addr, mem_wdata };
+                else  begin
+                    counter_reset_val = (39-2);
+                    data_load_val = { FAST_READ_CMD, mem_addr, mem_wdata };
+                end
 
                 next_state = CMDADDR1;
             end
@@ -112,7 +122,13 @@ always_comb begin
 
         CMDADDR2: begin
             counter_reset = 1;
-            counter_reset_val = (6-2);
+
+            if (rd_delay2)
+                counter_reset_val = (8-2);
+            else if (rd_delay)
+                counter_reset_val = (7-2);
+            else
+                counter_reset_val = (6-2);
 
             data_shift = 1;
 
@@ -131,8 +147,10 @@ always_comb begin
 
             if (mem_en && mem_wburst)
                 next_state = DATA_WBURST;
-            else
+            else begin
+                cs_n_sm = rd_delay2 && !mem_rburst;
                 next_state = DATA3;
+            end
         end
 
         DATA3: begin
@@ -144,8 +162,10 @@ always_comb begin
 
             if (mem_en && mem_rburst)
                 next_state = DATA_RBURST;
-            else
+            else begin
+                cs_n_sm = rd_delay && !mem_rburst;
                 next_state = CS_DELAY > 0 ? DELAY1 : IDLE;
+            end
         end
 
         DATA_WBURST: begin
@@ -179,9 +199,11 @@ always_comb begin
                 data_load = 1;
 
                 if (mem_wr)
-                    data_load_val = { 8'h82, mem_addr, mem_wdata };
+                    data_load_val = { WRITE_CMD, mem_addr, mem_wdata };
+                else if (!spi_fast)
+                    data_load_val = { READ_CMD,  mem_addr, mem_wdata };
                 else
-                    data_load_val = { 8'h83, mem_addr, 8'h81 }; // TODO: cmd rdata
+                    data_load_val = { FAST_READ_CMD, mem_addr, mem_wdata };
 
                 if (counter_done || CS_DELAY < 2)
                     next_state = DELAY3;
@@ -205,7 +227,10 @@ always_comb begin
             cs_n_sm  = 1;
 
             counter_reset = 1;
-            counter_reset_val = (31-2);
+            if (!cur_wr && spi_fast)
+                counter_reset_val = (39-2);
+            else
+                counter_reset_val = (31-2);
 
             next_state = CMDADDR1;
         end
@@ -221,7 +246,15 @@ always_ff @(posedge clk `ASYNC(posedge rst)) begin
         state <= next_state;
 end
 
-reg [4:0]counter;
+always_ff @(posedge clk) begin
+    if (en && ready_sm) begin
+       cur_wr    <= mem_wr;
+       rd_delay  <= !mem_wr && (spi_delay || spi_phase);
+       rd_delay2 <= !mem_wr && (spi_delay && spi_phase);
+    end
+end
+
+reg [5:0]counter;
 always_ff @(posedge clk) begin
     if (en && counter_reset)
         { counter_done, counter } <= { 1'b0, counter_reset_val };
@@ -229,13 +262,20 @@ always_ff @(posedge clk) begin
         { counter_done, counter } <= counter - 1;
 end
 
+reg miso_falling;
+always_ff @(posedge clkb) begin
+    miso_falling <= miso;
+end
+
+wire miso_sel = spi_phase ? miso_falling : miso;
+
 reg [39:0]data;
 always_ff @(posedge clk) begin
     if (en) begin
         if (data_load)
             data <= data_load_val;
         else if (data_shift)
-            data <= { data, miso };
+            data <= { data, miso_sel };
     end
 end
 
@@ -257,7 +297,7 @@ assign mosi = dout;
 assign mem_rdy    = ready_sm;
 assign mem_rdata  = data[7:0];
 
-assign mem_rdata0     = { data[6:0], miso };
+assign mem_rdata0     = { data[6:0], miso_sel };
 assign mem_rdata_load = rdata_load;
 
 endmodule

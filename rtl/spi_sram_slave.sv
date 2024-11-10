@@ -33,7 +33,8 @@ typedef enum integer {
     CMD2,          // cmd bits 0, setup addr and counter
     ADDR1,         // addr bits 23:1
     ADDR2,         // addr bit 0, mem read, setup counter
-    READ_DUMMY,
+    DUMMY1,
+    DUMMY2,
     READ1,         // load dout, incr addr, data bit 0 (2nd pass)
     READ2,         // data bit 7:2
     READ3,         // data bit 1, setup counter
@@ -140,13 +141,32 @@ always_comb begin
             if (cs_n)
                 next_state = DONE_OR_IDLE;
             else begin
-                if (data[6:0] == 7'h03)
+                if (data[6:0] == 7'h0b)
+                    next_state = DUMMY1;
+                else if (data[6:0] == 7'h03)
                     next_state = READ1;
                 else if (data[6:0] == 7'h02)
                     next_state = WRITE1;
                 else
                     next_state = ERR;
             end
+        end
+
+        DUMMY1: begin
+            if (cs_n)
+                next_state = DONE_OR_IDLE;
+            else if (counter_done)
+                next_state = DUMMY2;
+        end
+
+        DUMMY2: begin
+            counter_reset = 1;
+            counter_reset_val = (7-2);
+
+            if (cs_n)
+                next_state = DONE_OR_IDLE;
+            else
+                next_state = READ1;
         end
 
         READ1: begin

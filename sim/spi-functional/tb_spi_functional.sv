@@ -11,6 +11,10 @@ module tb_spi_functional (
     input wire rst
 );
 
+//localparam IODELAY = 3;
+//localparam IODELAY = 8;
+localparam IODELAY = 13;
+
 tb_clkrst clkrst_inst (.clk, .rst);
 
 import tb_utils::*;
@@ -20,11 +24,44 @@ wire cs_n;
 wire mosi;
 wire miso;
 
-logic [7:0]gpin = 8'b0000_0000;
+logic [7:0]gpin = 8'b0000_0011;
 wire  [7:0]gpout;
 logic [3:0]gpio_in = 4'b0;
 wire  [3:0]gpio_oe;
 wire  [3:0]gpio_out;
+
+logic miso_delay;
+`ifndef VERILATOR
+    always @* begin
+        miso_delay <= #IODELAY miso;
+    end
+`else
+    logic miso_delay1;
+    logic miso_delay2;
+    logic miso_delay3;
+
+    if (IODELAY >= 5)
+        always @(posedge clk) begin
+            miso_delay1 <= miso;
+        end
+    else
+        assign miso_delay1 = miso;
+
+    if (IODELAY >= 10)
+        always @(negedge clk) begin
+            miso_delay2 <= miso_delay1;
+        end
+    else
+        assign miso_delay2 = miso_delay1;
+
+    if (IODELAY >= 15)
+        always @(posedge clk) begin
+            miso_delay3 <= miso_delay2;
+        end
+    else
+        assign miso_delay3 = miso_delay2;
+    assign miso_delay = miso_delay3;
+`endif
 
 spi_cpu_6502 spi_cpu_inst (
     .clk,
@@ -33,7 +70,7 @@ spi_cpu_6502 spi_cpu_inst (
     .irq    (1'b0),
     .cs_n,
     .mosi,
-    .miso,
+    .miso   (miso_delay),
     .gpin,
     .gpout,
     .gpio_in,
