@@ -13,7 +13,8 @@ module tb_spi_functional (
 
 //localparam IODELAY = 3;
 //localparam IODELAY = 8;
-localparam IODELAY = 13;
+//localparam IODELAY = 13;
+localparam IODELAY = 0;
 
 tb_clkrst clkrst_inst (.clk, .rst);
 
@@ -23,6 +24,7 @@ import tb_utils::*;
 wire cs_n;
 wire mosi;
 wire miso;
+wire sync;
 
 logic [7:0]gpin = 8'b0000_0011;
 wire  [7:0]gpout;
@@ -71,6 +73,7 @@ spi_cpu_6502 spi_cpu_inst (
     .cs_n,
     .mosi,
     .miso   (miso_delay),
+    .sync,
     .gpin,
     .gpout,
     .gpio_in,
