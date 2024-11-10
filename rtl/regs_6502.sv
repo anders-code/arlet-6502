@@ -8,7 +8,11 @@
 `include "timescale.vh"
 `include "async_reset.vh"
 
-module regs_6502 (
+module regs_6502 #(
+    parameter ENABLE_UPAD  = 1,
+    parameter ENABLE_UPAI  = 1,
+    parameter ENABLE_UPAZO = 1
+) (
     input  wire clk,
     input  wire rst,
 
@@ -41,14 +45,22 @@ module regs_6502 (
 
 assign int_en = (cpu_addr[15:8] == 8'hdf); // 16'hdf00
 
+reg first;
+always_ff @(posedge clk `ASYNC(posedge rst)) begin
+    if (rst)
+        first <= 1;
+    else
+        first <= 0;
+end
+
 reg [7:0]csr_r;
 reg [7:0]upad_r;
 reg [7:0]upai_r;
 reg [7:0]upazo_r;
 reg [7:0]gpout_r;
 reg [7:0]gpio_r;
-always_ff @(posedge clk `ASYNC(posedge rst)) begin
-    if (rst) begin
+always_ff @(posedge clk) begin
+    if (first) begin
         csr_r   <= gpin;
         upad_r  <= 8'h00;
         upai_r  <= 8'h00;
@@ -76,9 +88,9 @@ logic [7:0]rdata;
 always_comb begin
     unique case (cpu_addr[2:0])
         3'h0: rdata = csr_r;
-        3'h1: rdata = upad_r;
-        3'h2: rdata = upai_r;
-        3'h3: rdata = upazo_r;
+        3'h1: rdata = upad;
+        3'h2: rdata = upai;
+        3'h3: rdata = upazo;
         3'h4: rdata = gpin;
         3'h5: rdata = gpout_r;
         3'h6: rdata = { 4'b0, gpio_in };
@@ -94,9 +106,9 @@ assign spi_phase = csr_r[2];
 assign spi_delay = csr_r[3];
 assign spi_fast  = csr_r[4];
 
-assign upad      = upad_r;
-assign upai      = upai_r;
-assign upazo     = upazo_r;
+assign upad      = ENABLE_UPAD  ? upad_r  : 8'b0;
+assign upai      = ENABLE_UPAI  ? upai_r  : 8'b0;
+assign upazo     = ENABLE_UPAZO ? upazo_r : 8'b0;
 
 assign gpout     = gpout_r;
 assign gpio_oe   = gpio_r[7:4];

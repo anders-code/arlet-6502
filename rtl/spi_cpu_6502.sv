@@ -12,6 +12,7 @@ module spi_cpu_6502 (
     output wire cs_n,
     output wire mosi,
     input  wire miso,
+    output wire sync,
 
     input  wire  [7:0]gpin,
     output wire  [7:0]gpout,
@@ -46,7 +47,7 @@ cpu_6502 cpu_inst (
     .IRQ   (irq),
     .NMI   (nmi),
     .RDY   (cpu_rdy),
-    .SYNC  (),
+    .SYNC  (sync),
     .IREAD (cpu_iread),
     .MEN   (cpu_en)
 );
@@ -62,7 +63,11 @@ wire  [7:0]upad;
 wire  [7:0]upai;
 wire  [7:0]upazo;
 
-regs_6502 regs_6502_inst (
+regs_6502 #(
+    .ENABLE_UPAI  (0),
+    .ENABLE_UPAD  (1),
+    .ENABLE_UPAZO (0)
+) regs_6502_inst (
     .clk,
     .rst,
     .cpu_addr,
