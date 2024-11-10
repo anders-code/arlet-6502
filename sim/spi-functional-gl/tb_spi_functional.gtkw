@@ -12,9 +12,9 @@
 [sst_expanded] 1
 [sst_vpaned_height] 269
 @28
-TOP.tb_spi_functional.tb_clkgen_inst.clki
-TOP.tb_spi_functional.rst
-TOP.tb_spi_functional.cpu_inst.RDY
+TOP.tb_spi_functional_gl.clk
+TOP.tb_spi_functional_gl.rst
+TOP.tb_spi_functional_gl.cpu_inst.RDY
 @22
 TOP.tb_spi_functional.cpu_inst.AB[15:0]
 TOP.tb_spi_functional.cpu_inst.PC[15:0]

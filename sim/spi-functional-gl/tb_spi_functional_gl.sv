@@ -15,9 +15,9 @@ tb_clkrst clkrst_inst (.clk, .rst);
 
 import tb_utils::*;
 
-logic [7:0] ui_in;
+wire  [7:0] ui_in;
 wire  [7:0] uo_out;
-logic [7:0] uio_in;
+wire  [7:0] uio_in;
 wire  [7:0] uio_out;
 wire  [7:0] uio_oe;
 
@@ -46,7 +46,7 @@ assign uio_in[1:0] = 0;
 
 logic       irq = 0;
 logic       nmi = 0;
-assign ui_in[5:0] = 0;
+assign ui_in[5:0] = 6'b00_0011;
 assign ui_in[6] = irq;
 assign ui_in[7] = nmi;
 
@@ -56,7 +56,9 @@ wire       mem_wr;
 wire  [7:0]mem_wdata;
 reg   [7:0]mem_rdata;
 
-spi_sram_slave spi_sram_slave_inst (
+spi_sram_slave #(
+    .CS_DELAY (0)
+) spi_sram_slave_inst (
     .clk,
     .clkb (~clk),
     .rst,
@@ -106,13 +108,12 @@ always @(posedge clk) begin
     // Arlet's core runs PC one cycle early so PC is 3469+1 when executing 3469
     if (tt_6502_inst.\spi_cpu_inst.cache_inst.cpu_rdy && PC == 'h3469+1) begin
         // http://forum.6502.org/viewtopic.php?f=8&t=6202#p90723
-        // 10 cycles of reset + 6 cycles before executing 0400 
+        // 10+3 cycles of reset + 6 cycles before executing 0400
         // first cycle where PC == 400+1 and state == DECODE and RDY is 2710:
-        //   1st cycle is 41 clks, rest are 44
-        //   10 + 41 + 5*44 == 271
+        //   13 + 6*41 == 259
         if (termcnt == 0)
             $display("\nSuccess! clocks %0d cycles %0d (ideal 96241364)\n",
-                $time/10 - 271, ($time/10 - 271)/44);
+                $time/10 - 259, ($time/10 - 259)/41);
         else if (termcnt >= 2)
             $finish(2);
 
