@@ -6,7 +6,9 @@
 `include "timescale.vh"
 `include "async_reset.vh"
 
-module spi_sram_slave (
+module spi_sram_slave #(
+    parameter CS_DELAY = 3
+) (
     input  wire clk,
     input  wire clkb,
     input  wire rst,
@@ -42,6 +44,8 @@ typedef enum integer {
     ERR,
     DELAY
 } State_Type;
+
+localparam State_Type DONE_OR_IDLE = CS_DELAY > 0 ? DONE : IDLE;
 
 State_Type state = IDLE;
 
@@ -98,7 +102,7 @@ always_comb begin
             data_shift = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else if (counter_done)
                 next_state = CMD2;
         end
@@ -110,7 +114,7 @@ always_comb begin
             data_shift = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else
                 next_state = ADDR1;
         end
@@ -119,10 +123,9 @@ always_comb begin
             addr_shift = 1;
 
             if (cs_n)
-                next_state = DONE;
-            else if (counter_done) begin
+                next_state = DONE_OR_IDLE;
+            else if (counter_done)
                 next_state = ADDR2;
-            end
         end
 
         ADDR2: begin
@@ -135,7 +138,7 @@ always_comb begin
             mem_en_sm  = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else begin
                 if (data[6:0] == 7'h03)
                     next_state = READ1;
@@ -151,7 +154,7 @@ always_comb begin
             addr_incr = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else
                 next_state = READ2;
         end
@@ -161,7 +164,7 @@ always_comb begin
             dout_shift = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else if (counter_done)
                 next_state = READ3;
         end
@@ -176,7 +179,7 @@ always_comb begin
             mem_en_sm  = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else
                 next_state = READ1;
         end
@@ -185,7 +188,7 @@ always_comb begin
             data_shift = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else if (counter_done)
                 next_state = WRITE2;
         end
@@ -197,7 +200,7 @@ always_comb begin
             data_shift = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else
                 next_state = WRITE3;
         end
@@ -211,19 +214,19 @@ always_comb begin
             mem_wr_sm  = 1;
 
             if (cs_n)
-                next_state = DONE;
+                next_state = DONE_OR_IDLE;
             else
                 next_state = WRITE1;
         end
 
         DONE: begin
             counter_reset = 1;
-            counter_reset_val = (2-2);
+            counter_reset_val = (CS_DELAY-2);
 
             if (!cs_n)
                 next_state = ERR;
             else
-                next_state = DELAY;
+                next_state = CS_DELAY > 1 ? DELAY : IDLE;
         end
 
         DELAY: begin

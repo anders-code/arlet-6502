@@ -127,7 +127,9 @@ cache_6502 cache_inst (
     .mem_rdata_load
 );
 
-spi_sram_master spi_sram_master_inst (
+spi_sram_master #(
+    .CS_DELAY (0)
+) spi_sram_master_inst (
     .clk,
     .clkb  (~clk),
     .rst,

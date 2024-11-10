@@ -6,7 +6,8 @@
 `include "async_reset.vh"
 
 module spi_sram_master #(
-    parameter REG_RDATA = 0
+    parameter REG_RDATA = 0,
+    parameter CS_DELAY = 3
 ) (
     input  wire clk,
     input  wire clkb,
@@ -136,7 +137,7 @@ always_comb begin
 
         DATA3: begin
             counter_reset = 1;
-            counter_reset_val = (3-2);
+            counter_reset_val = (CS_DELAY-2);
 
             data_shift = 1;
             rdata_load = 1;
@@ -144,7 +145,7 @@ always_comb begin
             if (mem_en && mem_rburst)
                 next_state = DATA_RBURST;
             else
-                next_state = DELAY1;
+                next_state = CS_DELAY > 0 ? DELAY1 : IDLE;
         end
 
         DATA_WBURST: begin
@@ -182,7 +183,7 @@ always_comb begin
                 else
                     data_load_val = { 8'h83, mem_addr, 8'h81 }; // TODO: cmd rdata
 
-                if (counter_done)
+                if (counter_done || CS_DELAY < 2)
                     next_state = DELAY3;
                 else
                     next_state = DELAY2;
